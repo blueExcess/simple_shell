@@ -6,6 +6,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include "basicshell.h"
 
 int main(int ac, char *av[],char **env)
 {
@@ -22,7 +23,7 @@ int main(int ac, char *av[],char **env)
 	do {
 	write(1, prompt, 4);
 	getline(&line, &len, stdin);
-	record_history(line, len);
+	record_history(line, len, startup);
 	/* pass line to parser */
 
 	free(line);
@@ -35,7 +36,7 @@ int main(int ac, char *av[],char **env)
 void record_history(char *input, size_t len, int startup)
 {
 	int file_tmp, file_perm, bw = 0;
-	ssize_t bytes_written, bytes_read, perm_br, perm_br;
+	ssize_t bytes_written, bytes_read, perm_br;
 	size_t written_total = 0;
 	char buffer[524288];
 	char *temp = "temp/simple_shell_tmp_history";
