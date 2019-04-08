@@ -57,12 +57,11 @@ void record_history(char *input, size_t len, int startup)
 		if (file_tmp < 0)
 			return;
 		close(file_tmp);
-	}
-
-	file_tmp = open(temp, O_WRONLY | O_APPEND, 00666);
-	if (file_tmp < 0)
-		return;
+		file_tmp = open(temp, O_WRONLY | O_APPEND, 00666);
+		if (file_tmp < 0)
+			return;
 /* set error flag? */
+	}
 	if (len > 0)
 	{
 		bytes_written = write(file_tmp, input, len);
