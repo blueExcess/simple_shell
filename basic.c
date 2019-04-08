@@ -1,16 +1,6 @@
 /* super basic shell - starting point we can build off (using std functions) */
-#include <sys/wait.h>
-#include <sys/types.h>
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <stdio.h>
-#include <unistd.h>
-#include <stdlib.h>
-#include <stdbool.h>
+#include "basicshell.h"
 
-bool F_EXIT = false;
-
-void record_history(char *input, size_t len, int startup);
 
 int main(int ac, char *av[], char **env)
 {
@@ -18,18 +8,17 @@ int main(int ac, char *av[], char **env)
 	size_t len = 0;
 	static char *prompt = "($) ";
 	pid_t parent_pid;
-	int startup = 1;
 
 	/* startup process */
-	record_history(line, len, startup);
-	startup = 0;
+	record_history(line, len);
+	F_STARTUP = false;
 
 	do {
 	write(1, prompt, 4);
 	getline(&line, &len, stdin);
 	if (strcmp(line, exit) == 0)
 		F_EXIT = true;
-	record_history(line, len, 0);
+	record_history(line, len, startup);
 	/* pass line to parser */
 	/* free(line); */
 	} while (F_EXIT == false);
@@ -38,20 +27,18 @@ int main(int ac, char *av[], char **env)
 }
 
 
-void record_history(char *input, size_t len, int startup)
+void record_history(char *input, size_t len)
 {
 	int file_tmp, file_perm, bw = 0;
-	ssize_t bytes_written, bytes_read, perm_br, perm_bw;
 	static size_t written_total = 0;
+	ssize_t bytes_written, bytes_read, perm_br;
+	size_t written_total = 0;
 	char buffer[524288];
 	char *temp = "/tmp/simple_shell_tmp_history";
 	char *path = "/home/vagrant/.simple_shell_history";
-	char *test = "/tmp/.shell_history";
 
-/* need line numbers in tmp - displayed by history cmd, removed for write to perm file */
-/* need function to count number of lines - based on \n found */
 /* startup - empty tmp file */
-	if (startup)
+	if (F_STARTUP)
 	{
 		file_tmp = open(temp, O_WRONLY | O_CREAT| O_TRUNC, 00666);
 		if (file_tmp < 0)

@@ -1,0 +1,29 @@
+#include "basicshell.h"
+
+unsigned int _wordCount(char *str)
+{
+	char *delim = "\n \t";
+	unsigned int wrdCnt, index, flag;
+
+	index = flag = 0;
+	wrdCnt = 1;
+	for (; str[index]; index++)
+	{
+		if (flag == 0 &&
+		    (str[index] == delim[0]
+		     || str[index] == delim[1]
+		     || str[index] == delim[2])
+		    && str[index++] != delim[0]
+		    && str[index++] != delim[1]
+		    && str[index++] != delim[2])
+		{
+			flag = 1;
+			wrdCnt++;
+		}
+		else
+		{
+			flag = 0;
+		}
+	}
+	return (wrdCnt);
+}
