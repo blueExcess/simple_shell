@@ -20,7 +20,10 @@ char **parser(char *string, char *delim)
 	{
 		tokened[index] = token = strtok('\0', delim);
 	}
-	global.command = tokened[0];
+	if (*tokened[0] == '/')
+	{
+		global.command = tokened[0];
+	}
 	return (tokened);
 }
 
