@@ -13,6 +13,7 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <stdbool.h>
+#include <stdarg.h>
 
 
 /* PROTOTYPES */
@@ -27,6 +28,9 @@ char **parser(char *str, char *delim);
 /* tools.c */
 unsigned int _wordCount(char *str);
 
+/* builtins.c */
+
+
 
 /* GLOBALS */
 /**
@@ -39,5 +43,6 @@ struct flags
 	bool exit;
 	bool startup;
 	bool interactive;
-};
+}flags;
+
 #endif
