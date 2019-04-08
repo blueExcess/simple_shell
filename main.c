@@ -11,7 +11,7 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line = NULL, *exit = "exit\n", *cd = "cd\n";
+	char *line = NULL, *exit = "exit\n", *cd = "cd\n", **token, *del = ' ';
 	size_t len = 0;
 	ssize_t actual;
 	static char *prompt = "($) ";
@@ -23,19 +23,21 @@ int main(int ac, char *av[], char **env)
 	flags.startup = false;
 
 	if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1))
-		globals.interactive = 1;
+		flags.interactive = 1;
 
 	do {
 		write(1, prompt, 4);
 		actual = getline(&line, &len, stdin);
 		if (strcmp(line, exit) == 0)
-			F_EXIT = true;
+		        flags.exit = true;
 		record_history(line, actual);
-		/* pass line to parser */
+		token = parser(line, del);
+		/* pass token to search */
+
 		free(line);
 		line = NULL;
 		len = 0;
-	} while (F_EXIT == false);
+	} while (flags.exit == false);
 	return (0);
 }
 
@@ -57,7 +59,7 @@ void record_history(char *input, ssize_t len)
 	char *path = "/home/vagrant/.simple_shell_history";
 
 /* startup - empty tmp file */
-	if (F_STARTUP)
+	if (flags.startup)
 	{
 		file_tmp = open(temp, O_WRONLY | O_CREAT | O_TRUNC, 00666);
 		if (file_tmp < 0)
@@ -79,7 +81,7 @@ void record_history(char *input, ssize_t len)
 /* set error flag? */
 
 /* on exit */
-	if (F_EXIT == true)
+	if (flags.exit == true)
 	{
 		close(file_tmp);
 		file_tmp = open(temp, O_RDONLY);
