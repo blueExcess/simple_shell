@@ -27,7 +27,7 @@ void path_finder(char **env)
 	parsed_path = parser(env_var, delim);
 	lengths = _astrlen(parsed_path);
 	test = lengths[0];
-	i = j = 0;
+	i = 0;
 
 /* allocate mem for new string (sub of path) and command */
 /* add '/' and command, then check if file exists. */
@@ -35,12 +35,12 @@ void path_finder(char **env)
 	do {
 		path_check = malloc(sizeof(char) * lengths[i]
 			 + 2 + sizeof(char) * globals.command_length);
-		x = lengths[j + 1];
+		x = lengths[i + 1];
 		path_check = parsed_path[0];
 		path_check[x] = '/';
 		_strtostr(globals.command, pass_check[x + 1]);
 		access_check = access(path_check, F_OK);
-		i++, j++;
+		i++;
 	} while (access_check || i < test);
 	// call execution or return value to pass to execution
 }
