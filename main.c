@@ -32,6 +32,7 @@ int main(int ac, char *av[], char **env)
 		        flags.exit = true;
 		record_history(line, actual);
 		token = parser(line, del);
+		search(
 		/* pass token to search */
 
 		free(line);

@@ -33,6 +33,7 @@ unsigned int _wordCount(char *str);
 
 
 /* GLOBALS */
+
 /**
  * flags - flags to use throughout program
  * @exit: if exit has been called
@@ -44,5 +45,14 @@ struct flags
 	bool startup;
 	bool interactive;
 }flags;
+
+/**
+ * globals - global variables (not bool flags)
+ * @command: name of command that's been parsed
+ */
+struct globals
+{
+	char *command;
+}globals;
 
 #endif
