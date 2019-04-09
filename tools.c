@@ -45,3 +45,86 @@ int _strcmp(char *s1, char *s2)
 	return (0);
 }
 
+/**
+ * _strlen - get length of string
+ * @str: string to check
+ *
+ * Return: length of string, -1 on fail
+ */
+int _strlen(char *str)
+{
+	int count = 0;
+
+	if (str == NULL)
+		return (-1);
+	for (; str[count]; count++)
+		;
+	return (count);
+}
+/**
+ * _astrlen - returns length of every string in array of pointers to strings
+ * @str: array of pointers to strings to get length of
+ *
+ * Return: an array of lengths of strings, arr[0] = len of new array;
+ */
+int *_astrlen(char **str)
+{
+	static int arr[1024];
+	int i, j, x;
+
+	if (str == NULL || *str == NULL)
+		return (-1);
+	/* how many pointers in array */
+	for (x = 0; str[x]; x++)
+		;
+	arr[0] = x;
+	for (i = 0; str[i]; i++)
+	{
+		for (j = 0; str[i][j]; j++)
+			;
+		arr[i + 1] = j;
+	}
+
+	return (arr);
+}
+
+/**
+ * _strcpy - copy a string from source to location
+ * @source: string to copy
+ * @extra: how many extra bytes to include after end of string
+ *
+ * Return: pointer to begining of null-term string.
+ */
+char *_strcpy(char *source, unsigned int extra)
+{
+	char *copy;
+	int i;
+
+	if (source == NULL)
+		return (NULL);
+	for (i = 0; source[i]; i++)
+		;
+	copy = malloc(sizeof(char) * i + extra);
+	if (copy == NULL)
+		return (NULL);
+	for (i = 0; source[i]; i++)
+		copy[i] = source[i];
+	copy[i + extra] = '\0';
+}
+
+/**
+ * _strtostr - copy a string from source to destination
+ * @source: string to copy
+ * @dest: where to copy to
+ *
+ * Return: VOID
+ */
+void *_strtostr(char *source, char *dest)
+{
+	int i;
+
+	if (source == NULL || dest == NULL)
+		return (NULL);
+	for (i = 0; source[i]; i++)
+		dest[i] = source[i];
+}

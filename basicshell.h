@@ -14,6 +14,7 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdarg.h>
+#include <limits.h>
 
 
 /* PROTOTYPES */
@@ -24,9 +25,15 @@ void record_history(char *input, ssize_t len);
 
 /* parser.c */
 char **parser(char *str, char *delim);
+// path_finder here
 
 /* tools.c */
 unsigned int _wordCount(char *str);
+int _strcmp(char *s1, char *s2);
+int _strlen(char *str);
+int *_astrlen(char **str);
+char *_strcpy(char *source, unsigned int extra);
+void *_strtostr(char *source, char *dest);
 
 /* builtins.c */
 
@@ -38,6 +45,7 @@ unsigned int _wordCount(char *str);
  * flags - flags to use throughout program
  * @exit: if exit has been called
  * @startup: if startup processes need to be run
+ * @interactive: if in interactive mode or not
  */
 struct flags
 {
@@ -53,6 +61,7 @@ struct flags
 struct globals
 {
 	char *command;
+	int command_length;
 }globals;
 
 #endif
