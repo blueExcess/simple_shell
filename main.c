@@ -32,8 +32,8 @@ int main(int ac, char *av[], char **env)
 		        flags.exit = true;
 		record_history(line, actual);
 		token = parser(line, del);
-		search(
-		/* pass token to search */
+		path_finder(env); // need to change prototype
+		/* pass to execution? */
 
 		free(line);
 		line = NULL;
