@@ -40,6 +40,7 @@ void path_finder(char **env)
 		path_check[x] = '/';
 		_strtostr(globals.command, pass_check[x + 1]);
 		access_check = access(path_check, F_OK);
+		i++, j++;
 	} while (access_check || i < test);
 	// call execution or return value to pass to execution
 }
