@@ -9,6 +9,7 @@ char **parser(char *string, char *delim)
 
 	wrdCnt = _wordCount(string);
 	tokened = malloc((wrdCnt + 1) * sizeof(char *));
+	/* malloced */
 	if (!tokened)
 	{
 		perror("Memory Allocation failed\n");
@@ -20,21 +21,22 @@ char **parser(char *string, char *delim)
 	{
 		tokened[index] = token = strtok('\0', delim);
 	}
-	if (*tokened[0] == '/')
+	if (*tokened[0] != '/')
 	{
-		global.command = tokened[0];
+		globals.command = tokened[0];
 	}
 	return (tokened);
 }
 
 /*fork/exec function*/
-void forkExec(char *argv[], char *path, char **env)
+void forkExec(char *path, char **env)
 {
 	pid_t child = 0;
-	char *fullPath;
+	char *command = globals.command;
 
-	fullPath = "bin/ls"; /*nate to make*/ /*search(argv[0], path);*/
-	if (!fullPath)
+	command = malloc(_strlen(global.command) * sizeof(char *))
+
+	if (!path)
 	{
 		perror("command not found\n");
 		return;
@@ -44,13 +46,14 @@ void forkExec(char *argv[], char *path, char **env)
 	{
 	case -1:
 		perror("fork failed\n");
+
 		break;
 	case 0:
-		if (execve(fullPath, argv, env) == -1)
+		if (execve(path, command, env) == -1)
 			perror("Execution failed\n");
 		break;
 	default:
-		free(fullPath);
+		free(path);
 		if (wait(NULL) == -1)
 			perror("wait failed\n");
 		break;
