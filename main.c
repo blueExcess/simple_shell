@@ -11,7 +11,7 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line = NULL, *exit = "exit\n", *cd = "cd\n", **token, *del = " ";
+	char *line = NULL, *exit = "exit\n", **token, *del = " ";
 	char *path;
 	size_t len = 0;
 	ssize_t actual;
@@ -38,7 +38,7 @@ int main(int ac, char *av[], char **env)
 		/* if path fails, search builtins */
 		/* final build: change to call forkExec from path_finder */
 		fork_exec(path, env);
-		free(path); // temp. -- undeclared? How to free?
+		free(path);
 
 		free(line);
 		line = NULL;

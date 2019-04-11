@@ -127,7 +127,7 @@ void _strtostr(char *source, char *dest)
 
 	if (source == NULL || dest == NULL)
 		return;
-	for (i = 0; source[i]; i++)
+	;	for (i = 0; source[i]; i++)
 		dest[i] = source[i];
 }
 

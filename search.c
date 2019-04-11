@@ -16,6 +16,7 @@ char *path_finder(char **env)
 	}
 /* set pointer to = in env and move to next value */
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
+	printf("path_str_ptr = %s\n", path_str_ptr); //debug
 /* copy path to new str */
 	path_str = _strcpy(path_str_ptr, 1); // null included?
 /* pass path to tokenizer */
