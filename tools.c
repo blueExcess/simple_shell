@@ -9,16 +9,19 @@ unsigned int _wordCount(char *str)
 
 	index = 0;
 	flag = 0;
-	wrdCnt = 1;
+	wrdCnt = 0;
+
+	printf("%s\n", str);
 	for (; str[index]; index++)
 	{
+		printf("%c\n", str[index]);
 		if (flag == 0 &&
 		    (str[index] == delim[0]
 		     || str[index] == delim[1]
 		     || str[index] == delim[2])
-		    && str[index++] != delim[0]
-		    && str[index++] != delim[1]
-		    && str[index++] != delim[2])
+		    && str[index + 1] != delim[0]
+		    && str[index + 1] != delim[1]
+		    && str[index + 1] != delim[2])
 		{
 			flag = 1;
 			wrdCnt++;
@@ -28,6 +31,8 @@ unsigned int _wordCount(char *str)
 			flag = 0;
 		}
 	}
+	printf("%s\n", str);
+	printf("%d\n", wrdCnt);
 	return (wrdCnt);
 }
 
