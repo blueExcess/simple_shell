@@ -1,4 +1,4 @@
-/* function to be merged into parser.c for searching PATH */
+/* functions for searching things */
 
 char *path_finder(char **env)
 {
