@@ -7,7 +7,7 @@ char **parser(char *string, char *delim)
 	char **tokened, *token, *command;
 
 	wrdCnt = _wordCount(string);
-	tokened = malloc((wrdCnt + 1) * sizeof(char *));
+	tokened = malloc((wrdCnt) * sizeof(char *));
 	/* malloced */
 	if (!tokened)
 	{
@@ -38,18 +38,18 @@ void fork_exec(char *path, char **env)
 // where do you call fork or execve or wait?
 // currently I think it will only do one of the three per call (no loop)
 	pid_t child = 0;
-	char *command;
+	char *command[25];
 
 	/* command = malloc(_strlen(globals.command) * sizeof(char *)); */
 // above redundant?
-	command = globals.command;
+	*command = globals.command;
 
 	if (!path)
 	{
 		perror("command not found\n");
 		return;
 	}
-
+/*switch runs one of the two cases, then runs the default after*/
 	switch (child = fork())
 	{
 	case -1:

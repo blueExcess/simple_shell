@@ -11,7 +11,7 @@ char *path_finder(char **env)
 /* find matching env variable */
 	for (i = 0; *env_copy; i++, env_copy++)
 	{
-		if (_strncmp(*env_copy, name, 5) == 0)
+		if (strncmp(*env_copy, name, 5) == 0)
 			break;
 	}
 /* set pointer to = in env and move to next value */

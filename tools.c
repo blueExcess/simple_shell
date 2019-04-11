@@ -7,7 +7,8 @@ unsigned int _wordCount(char *str)
 	char *delim = "\n \t";
 	unsigned int wrdCnt, index, flag;
 
-	index = flag = 0;
+	index = 0;
+	flag = 0;
 	wrdCnt = 1;
 	for (; str[index]; index++)
 	{
