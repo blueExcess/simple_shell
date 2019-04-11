@@ -156,3 +156,41 @@ char *_strchr(char *str, int c)
 			return (ptr);
 	return (NULL);
 }
+
+/**
+ * nl_cleaner - removes all nl from string
+ * @str: string to clean
+ *
+ * Return: VOID
+ */
+void nl_cleaner(char *str)
+{
+	char *hunter = str, *mover = str;
+	int max_length, i;
+	bool nl;
+
+	printf("entered scrubber\n"); // debug
+	if (str == NULL)
+		return;
+	if (*str == '\0')
+		return;
+	printf("(scrubber) string: %s\n", str); // debug
+	do{
+		i = 0;
+		nl = false;
+		max_length = _strlen(hunter);
+		hunter = str;
+		for (; *hunter != '\n' && *mover; hunter++, i++)
+		{
+			nl = true;
+			mover = hunter + 1;
+			for (; *mover; i++, hunter++, mover++)
+			{
+				*hunter = *mover;
+				printf("i: %d\n", i);
+			}
+			printf("ml: %d, i: %d\n", max_length, i); // debug
+		}
+	} while (nl == true);
+	printf("(post scrubber) string: %s\n", str); // debug
+}

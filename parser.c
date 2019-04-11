@@ -33,6 +33,7 @@ char **parser(char *string, char *delim)
 	return (tokened);
 }
 
+
 /*fork/exec function*/
 void fork_exec(char *path, char **tokens,char **env)
 {
