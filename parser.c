@@ -7,7 +7,7 @@ char **parser(char *string, char *delim)
 	char **tokened, *token, *command;
 
 	wrdCnt = _wordCount(string);
-	tokened = malloc((wrdCnt) * sizeof(char *));
+	tokened = malloc((wrdCnt + 1) * sizeof(char *));
 	/* malloced */
 	if (!tokened)
 	{
