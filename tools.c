@@ -11,7 +11,6 @@ unsigned int _wordCount(char *str)
 	flag = 0;
 	wrdCnt = 1;
 
-	printf("%s\n", str);
 	for (; str[index]; index++)
 	{
 		printf("%c\n", str[index]);
@@ -31,8 +30,6 @@ unsigned int _wordCount(char *str)
 			flag = 0;
 		}
 	}
-	printf("%s\n", str);
-	printf("%d\n", wrdCnt);
 	return (wrdCnt);
 }
 
