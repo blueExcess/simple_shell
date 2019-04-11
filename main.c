@@ -34,11 +34,12 @@ int main(int ac, char *av[], char **env)
 		        flags.exit = true;
 		record_history(line, actual);
 		token = parser(line, del);
-		path = path_finder(env); // need to change prototype
+		path = path_finder(env);
+		printf("(main) path: %s\n", path);
 		/* if path fails, search builtins */
 		/* final build: change to call forkExec from path_finder */
 
-		fork_exec(path, env);
+		fork_exec(path, token, env);
 		free(path);
 
 		free(line);

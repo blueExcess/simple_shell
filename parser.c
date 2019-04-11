@@ -28,6 +28,7 @@ char **parser(char *string, char *delim)
 			return (NULL); // set error flag?
 		command = tokened[0]; // correct?
 		globals.command = command;
+		globals.command_length = _strlen(command);
 	}
 	return (tokened);
 }

@@ -13,7 +13,6 @@ unsigned int _wordCount(char *str)
 
 	for (; str[index]; index++)
 	{
-		printf("%c\n", str[index]);
 		if (flag == 0 &&
 		    (str[index] == delim[0]
 		     || str[index] == delim[1]
@@ -108,12 +107,14 @@ char *_strcpy(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		;
-	copy = malloc(sizeof(char) * i + extra + 1);
+	copy = malloc(sizeof(char) * i + 1 + extra);
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		copy[i] = source[i];
-	copy[i + 1] = '\0';
+	copy[i + extra] = '\0';
+
+	return(copy);
 }
 
 /**
