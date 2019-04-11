@@ -32,9 +32,10 @@ char **parser(char *string, char *delim)
 void forkExec(char *path, char **env)
 {
 	pid_t child = 0;
-	char *command = globals.command;
+	char *command;
 
-	command = malloc(_strlen(global.command) * sizeof(char *))
+	command = malloc(_strlen(global.command) * sizeof(char *));
+	command = globals.command;
 
 	if (!path)
 	{
