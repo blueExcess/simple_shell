@@ -40,7 +40,8 @@ char *path_finder(char **env)
 			free(path_to_check);
 		i++;
 	} while (access_check || i < num_tokens);
+/* for testing, will return to main. Actual will sent to forkExec */
 	if (i == num_tokens)
-		return (NULL);
+		return (NULL); // will search builtins
 	return (path_to_check);
 }

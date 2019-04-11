@@ -1,6 +1,5 @@
+/* file for parsing and calling functions */
 #include "basicshell.h"
-
-
 
 char **parser(char *string, char *delim)
 {
@@ -29,7 +28,7 @@ char **parser(char *string, char *delim)
 }
 
 /*fork/exec function*/
-void forkExec(char *path, char **env)
+void fork_exec(char *path, char **env)
 {
 	pid_t child = 0;
 	char *command;
@@ -59,4 +58,5 @@ void forkExec(char *path, char **env)
 			perror("wait failed\n");
 		break;
 	}
+	free(globals.command); // temp
 }

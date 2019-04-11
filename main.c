@@ -12,6 +12,7 @@
 int main(int ac, char *av[], char **env)
 {
 	char *line = NULL, *exit = "exit\n", *cd = "cd\n", **token, *del = ' ';
+	char *path;
 	size_t len = 0;
 	ssize_t actual;
 	static char *prompt = "($) ";
@@ -33,8 +34,11 @@ int main(int ac, char *av[], char **env)
 		        flags.exit = true;
 		record_history(line, actual);
 		token = parser(line, del);
-		path_finder(env); // need to change prototype
-		/* pass to execution? */
+		path = path_finder(env); // need to change prototype
+		/* if path fails, search builtins */
+		/* final build: change to call forkExec from path_finder */
+		fork_exec(path, env);
+		free(path_to_check); // temp.
 
 		free(line);
 		line = NULL;
