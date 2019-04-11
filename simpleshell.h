@@ -15,6 +15,7 @@
 #include <stdbool.h>
 #include <stdarg.h>
 #include <limits.h>
+#include <errno.h>
 
 
 /* PROTOTYPES */

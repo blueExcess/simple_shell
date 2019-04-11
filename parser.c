@@ -1,5 +1,5 @@
 /* file for parsing and calling functions */
-#include "basicshell.h"
+#include "simpleshell.h"
 
 char **parser(char *string, char *delim)
 {

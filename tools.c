@@ -1,4 +1,5 @@
-#include "basicshell.h"
+/* helper functions */
+#include "simpleshell.h"
 
 /* word count */
 unsigned int _wordCount(char *str)

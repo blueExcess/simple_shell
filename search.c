@@ -1,4 +1,5 @@
 /* functions for searching things */
+#include "simpleshell.h"
 
 char *path_finder(char **env)
 {
