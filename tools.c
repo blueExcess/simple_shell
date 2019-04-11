@@ -74,7 +74,7 @@ int *_astrlen(char **str)
 	int i, j, x;
 
 	if (str == NULL || *str == NULL)
-		return (-1);
+		return (NULL);
 	/* how many pointers in array */
 	for (x = 0; str[x]; x++)
 		;
@@ -120,12 +120,12 @@ char *_strcpy(char *source, unsigned int extra)
  *
  * Return: VOID
  */
-void *_strtostr(char *source, char *dest)
+void _strtostr(char *source, char *dest)
 {
 	int i;
 
 	if (source == NULL || dest == NULL)
-		return (NULL);
+		return;
 	for (i = 0; source[i]; i++)
 		dest[i] = source[i];
 }
@@ -137,7 +137,7 @@ void *_strtostr(char *source, char *dest)
  *
  * Return: pointer on success, NULL on failure. \0 is valid/included.
  */
-char *_strchr(const char *str, int c)
+char *_strchr(char *str, int c)
 {
 /* NOTE: if '\0' is specified, will return pointer to NULL char at */
 /* end of string (s + strlen(s)) */

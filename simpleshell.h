@@ -37,8 +37,8 @@ int _strcmp(char *s1, char *s2);
 int _strlen(char *str);
 int *_astrlen(char **str);
 char *_strcpy(char *source, unsigned int extra);
-void *_strtostr(char *source, char *dest);
-char *_strchr(const char *str, int c);
+void _strtostr(char *source, char *dest);
+char *_strchr(char *str, int c);
 
 /* builtins.c */
 

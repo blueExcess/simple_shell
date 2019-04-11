@@ -5,6 +5,7 @@ char *path_finder(char **env)
 {
 	char **env_copy = env, **parsed_path;
 	char *name = "PATH=", *path_str_ptr, *path_to_check;
+	char *path_str, *temp;
 	int i, *path_lengths, num_tokens, str_len, access_check;
 
 /* find matching env variable */
@@ -14,11 +15,11 @@ char *path_finder(char **env)
 			break;
 	}
 /* set pointer to = in env and move to next value */
-	path_str_ptr = (_strchr(env_copy, '=')) + 1;
+	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
 /* copy path to new str */
 	path_str = _strcpy(path_str_ptr, 1); // null included?
 /* pass path to tokenizer */
-	parsed_path = parser(path_str, ':');
+	parsed_path = parser(path_str, ":");
 	free(path_str);
 /* get length of every string after parsing */
 	path_lengths = _astrlen(parsed_path);
@@ -35,7 +36,8 @@ char *path_finder(char **env)
 		path_to_check = parsed_path[i];
 		str_len = path_lengths[i + 1];
 		path_to_check[str_len] = '/';
-		_strtostr(globals.command, path_to_check[str_len + 1]);
+		temp = (path_to_check + str_len + 1);
+		_strtostr(globals.command, temp);
 		access_check = access(path_to_check, F_OK);
 		if (access_check)
 			free(path_to_check);
