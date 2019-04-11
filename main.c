@@ -24,9 +24,10 @@ int main(int ac, char *av[], char **env)
 
 	if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1))
 		flags.interactive = 1;
+	/* if flag set, don't print prompt */
 
 	do {
-		write(1, prompt, 4);
+		write(2, prompt, 4);
 		actual = getline(&line, &len, stdin);
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;

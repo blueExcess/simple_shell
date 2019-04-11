@@ -25,7 +25,9 @@ void record_history(char *input, ssize_t len);
 
 /* parser.c */
 char **parser(char *str, char *delim);
-// path_finder here
+
+/* search.c */
+char *path_finder(char **env);
 
 /* tools.c */
 unsigned int _wordCount(char *str);
@@ -34,6 +36,7 @@ int _strlen(char *str);
 int *_astrlen(char **str);
 char *_strcpy(char *source, unsigned int extra);
 void *_strtostr(char *source, char *dest);
+char *_strchr(const char *str, int c);
 
 /* builtins.c */
 

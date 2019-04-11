@@ -128,3 +128,26 @@ void *_strtostr(char *source, char *dest)
 	for (i = 0; source[i]; i++)
 		dest[i] = source[i];
 }
+
+/**
+ * _strchr - sets pointer to first occurrence of of c in str
+ * @str: string to check
+ * @c: character
+ *
+ * Return: pointer on success, NULL on failure. \0 is valid/included.
+ */
+char *_strchr(const char *str, int c)
+{
+/* NOTE: if '\0' is specified, will return pointer to NULL char at */
+/* end of string (s + strlen(s)) */
+	char *ptr = str;
+
+	if (str == NULL)
+		return (NULL);
+	if (c == 0)
+		return (ptr + _strlen(ptr));
+	for (; *ptr; ptr++)
+		if (*ptr == c)
+			return (ptr);
+	return (NULL);
+}
