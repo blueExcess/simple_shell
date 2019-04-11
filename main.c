@@ -37,6 +37,7 @@ int main(int ac, char *av[], char **env)
 		path = path_finder(env); // need to change prototype
 		/* if path fails, search builtins */
 		/* final build: change to call forkExec from path_finder */
+
 		fork_exec(path, env);
 		free(path);
 

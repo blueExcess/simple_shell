@@ -26,7 +26,7 @@ void record_history(char *input, ssize_t len);
 
 /* parser.c */
 char **parser(char *str, char *delim);
-void fork_exec(char *path, char **env);
+void fork_exec(char *path, char **token, char **env);
 
 /* search.c */
 char *path_finder(char **env);
