@@ -7,7 +7,7 @@ char **parser(char *string, char *delim)
 	char **tokened, *token, *command;
 
 	wrdCnt = _wordCount(string);
-	tokened = malloc((wrdCnt + 1) * sizeof(char *));
+	tokened = malloc((wrdCnt) * sizeof(char *));
 	/* malloced */
 	if (!tokened)
 	{
@@ -33,16 +33,12 @@ char **parser(char *string, char *delim)
 }
 
 /*fork/exec function*/
-void fork_exec(char *path, char **env)
+void fork_exec(char *path, char **tokens,char **env)
 {
 // where do you call fork or execve or wait?
 // currently I think it will only do one of the three per call (no loop)
 	pid_t child = 0;
-	char *command[25];
 
-	/* command = malloc(_strlen(globals.command) * sizeof(char *)); */
-// above redundant?
-	*command = globals.command;
 
 	if (!path)
 	{
@@ -57,7 +53,7 @@ void fork_exec(char *path, char **env)
 
 		break;
 	case 0:
-		if (execve(path, command, env) == -1) // arg 2 needs to be of type *argv[] (all remaining arguments after *av[0])
+		if (execve(path, tokens, env) == -1) // arg 2 needs to be of type *argv[] (all remaining arguments after *av[0])
 			perror("Execution failed\n");
 		break;
 	default:
@@ -66,5 +62,5 @@ void fork_exec(char *path, char **env)
 			perror("wait failed\n");
 		break;
 	}
-	free(globals.command); // temp
+	free(tokens); // temp
 }

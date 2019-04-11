@@ -9,7 +9,7 @@ unsigned int _wordCount(char *str)
 
 	index = 0;
 	flag = 0;
-	wrdCnt = 0;
+	wrdCnt = 1;
 
 	printf("%s\n", str);
 	for (; str[index]; index++)
@@ -111,7 +111,7 @@ char *_strcpy(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		;
-	copy = malloc(sizeof(char) * i + extra);
+	copy = malloc(sizeof(char) * i + extra + 1);
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; source[i]; i++)
