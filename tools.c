@@ -111,12 +111,12 @@ char *_strcpy(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		;
-	copy = malloc(sizeof(char) * i + extra);
+	copy = malloc(sizeof(char) * i + extra + 1);
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		copy[i] = source[i];
-	copy[i + extra] = '\0';
+	copy[i + 1] = '\0';
 }
 
 /**
@@ -132,7 +132,7 @@ void _strtostr(char *source, char *dest)
 
 	if (source == NULL || dest == NULL)
 		return;
-	;	for (i = 0; source[i]; i++)
+	for (i = 0; source[i]; i++)
 		dest[i] = source[i];
 }
 
