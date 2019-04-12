@@ -33,9 +33,7 @@ int main(int ac, char *av[], char **env)
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;
 		record_history(line, actual);
-		printf("line: %s\n", line); // debug
 		nl_remover(line);
-		printf("(after nl remover) line: %s\n", line); // debug
 		token = parser(line, del);
 		path = path_finder(env);
 		printf("(main) path: %s\n", path);
@@ -45,7 +43,7 @@ int main(int ac, char *av[], char **env)
 		fork_exec(path, token, env);
 		free(path);
 
-		free(line);
+		/*free(line); */
 		line = NULL;
 		len = 0;
 	} while (flags.exit == false);

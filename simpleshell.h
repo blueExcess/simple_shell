@@ -40,6 +40,7 @@ char *_strcpy(char *source, unsigned int extra);
 void _strtostr(char *source, char *dest);
 char *_strchr(char *str, int c);
 void nl_cleaner(char *str);
+void nl_remover(char *str);
 
 /* builtins.c */
 

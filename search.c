@@ -29,7 +29,7 @@ char *path_finder(char **env)
 		printf("parsed_path[%d]: %s\n", x, parsed_path[x]);
 	/* DEBUG */
 
-	free(path_str);
+/*	free(path_str);*/
 /* get length of every string after parsing */
 	path_lengths = _astrlen(parsed_path);
 
