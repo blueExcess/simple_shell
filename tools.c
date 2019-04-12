@@ -194,3 +194,17 @@ void nl_cleaner(char *str)
 	} while (nl == true);
 	printf("(post scrubber) string: %s\n", str); // debug
 }
+
+void nl_remover(char *str)
+{
+	char *finder, *dest;
+	char remove = '\n';
+
+	for (finder = dest = str; *finder != '\0'; finder++)
+	{
+		*dest = *finder;
+		if (*dest != remove)
+			dest++;
+	}
+	*dest = '\0';
+}

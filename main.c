@@ -33,7 +33,9 @@ int main(int ac, char *av[], char **env)
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;
 		record_history(line, actual);
-		nl_cleaner(line);
+		printf("%s", line);
+		nl_remover(line);
+		printf("%s", line);
 		token = parser(line, del);
 		path = path_finder(env);
 		printf("(main) path: %s\n", path);
