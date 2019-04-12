@@ -81,7 +81,7 @@ int *_astrlen(char **str)
 	for (x = 0; str[x]; x++)
 		;
 	arr[0] = x;
-	for (i = 0; str[i]; i++)
+	for (i = 0; str[i - 1]; i++)
 	{
 		for (j = 0; str[i][j]; j++)
 			;

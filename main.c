@@ -33,9 +33,9 @@ int main(int ac, char *av[], char **env)
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;
 		record_history(line, actual);
-		printf("%s", line);
+		printf("line: %s\n", line); // debug
 		nl_remover(line);
-		printf("%s", line);
+		printf("(after nl remover) line: %s\n", line); // debug
 		token = parser(line, del);
 		path = path_finder(env);
 		printf("(main) path: %s\n", path);
