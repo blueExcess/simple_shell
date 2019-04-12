@@ -43,7 +43,7 @@ int main(int ac, char *av[], char **env)
 		fork_exec(path, token, env);
 		free(path);
 
-		free(line);
+		/*free(line); */
 		line = NULL;
 		len = 0;
 	} while (flags.exit == false);
