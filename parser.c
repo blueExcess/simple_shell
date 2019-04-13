@@ -39,8 +39,8 @@ void fork_exec(char *path, char **tokens,char **env)
 {
 // where do you call fork or execve or wait?
 // currently I think it will only do one of the three per call (no loop)
-	pid_t child = 0;
-
+	pid_t child;
+	int status;
 
 	if (!path)
 	{
@@ -48,21 +48,17 @@ void fork_exec(char *path, char **tokens,char **env)
 		return;
 	}
 /*switch runs one of the two cases, then runs the default after*/
-	switch (child = fork())
+	child = fork();
+	if (child == -1)
 	{
-	case -1:
 		perror("fork failed\n");
-
-		break;
-	case 0:
-		if (execve(path, tokens, env) == -1) // arg 2 needs to be of type *argv[] (all remaining arguments after *av[0])
-			perror("Execution failed\n");
-		break;
-	default:
-		free(path);
-		if (wait(NULL) == -1)
-			perror("wait failed\n");
-		break;
 	}
-	free(tokens); // temp
+	if (child == 0)
+	{
+		execve(path, tokens, env);
+		perror("Execution failed\n");
+	        exit(-1);
+	}
+	else
+		wait(&status);
 }
