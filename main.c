@@ -15,21 +15,22 @@ int main(int ac, char *av[], char **env)
 	char *path;
 	size_t len = 0;
 	ssize_t actual;
-	static char *prompt = "($) ";
 	pid_t parent_pid;
 
 	/* startup process */
-	flags.startup = true;
-	record_history(line, len);
-	flags.startup = false;
+	/* flags.startup = true; */
+	/* record_history(line, len); */
+	/* flags.startup = false; */
+	/* if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1)) */
+	/* 	flags.interactive = true; */
 
-	if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1))
-		flags.interactive = 1;
-	/* if flag set, don't print prompt */
+	startup();
 
 	do {
-		write(2, prompt, 4);
+		/* write(2, prompt, 4); */
+		print_prompt();
 		actual = getline(&line, &len, stdin);
+		globals.line_no++;
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;
 		record_history(line, actual);
@@ -107,4 +108,41 @@ void record_history(char *input, ssize_t len)
 		close(file_tmp);
 		close(file_perm);
 	}
+}
+
+
+/**
+ * prompt - if interactive mode, print prompt to stderr, else no prompt
+ *
+ * Return: VOID
+ */
+void print_prompt(void)
+{
+	static char *prompt = "($) ";
+
+	if (flags.interactive == true)
+		write(2, prompt, 4);
+}
+
+/**
+ * startup - run all shell startup proscesses
+ *
+ * Return: VOID
+ */
+void startup(void)
+{
+	/* set startup flag */
+	flags.startup = true;
+
+	/* run startup functions */
+/* may end up tx startup sequences of functions here */
+
+// check if interactive
+	if (isatty(STDOUT_FILENO) == 1 && isatty(STDIN_FILENO) == 1)
+		flags.interactive = true;
+//set up record keeping
+	record_history(NULL, 0);
+
+	/* unset startup flag */
+	flags.startup = false;
 }
