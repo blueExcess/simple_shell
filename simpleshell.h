@@ -48,7 +48,8 @@ char *_strchr(char *str, int c);
 void nl_cleaner(char *str);
 void nl_remover(char *str);
 char *_strcat(char *dest, char *src);
-int _atoi(char *str);
+long int _atoi(char *str);
+void fly_free(char **str);
 
 
 

@@ -10,7 +10,8 @@
 int shell_exit(char **av)
 {
 	char *status = av[1];
-	int value = 0, i = 0;
+	int i = 0;
+	long int value = 0;
 	bool err = false;
 
 	if (status)
@@ -22,7 +23,7 @@ int shell_exit(char **av)
 				err = true;
 				break;
 			}
-		if (i > 10)
+		if (i > 11)
 			err = true;
 		if (!err)
 			value = _atoi(status);

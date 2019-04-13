@@ -253,7 +253,7 @@ char *_strcat(char *dest, char *src)
  *
  * Return: int
  */
-int _atoi(char *str)
+long int _atoi(char *str)
 {
 	int i = 0, num = 0;
 
@@ -264,4 +264,21 @@ int _atoi(char *str)
 			num = num * 10 + (str[i] - '0');
 
 	return (num);
+}
+
+/**
+ * fly_free - free arrays of pointers to strings
+ * @str: thing to set free
+ *
+ * Return: VOID
+ */
+void fly_free(char **str)
+{
+	int i = 0;
+
+	if (str == NULL || *str == NULL)
+		return;
+	for (; str[i]; i++)
+		free(str[i]);
+	free(str);
 }
