@@ -34,6 +34,9 @@ void fork_exec(char *path, char **token, char **env);
 char *path_finder(char **env);
 int search_builtins(char **args);
 
+/* builtins.c */
+int shell_exit(char **av);
+
 /* tools.c */
 unsigned int _wordCount(char *str);
 int _strcmp(char *s1, char *s2);
@@ -45,7 +48,8 @@ char *_strchr(char *str, int c);
 void nl_cleaner(char *str);
 void nl_remover(char *str);
 char *_strcat(char *dest, char *src);
-/* builtins.c */
+long int _atoi(char *str);
+void fly_free(char **str);
 
 
 
@@ -74,6 +78,7 @@ struct global
 	char *command;
 	int command_length;
 	int line_no;
+	int exit_status;
 
 }global;
 

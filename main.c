@@ -11,11 +11,11 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line = NULL, *exit = "exit\n", **token, *del = " ";
-	char *path;
+	char *line = NULL, *exit = "exit\n", **token, *del = " ", *path;
 	size_t len = 0;
 	ssize_t actual;
 	pid_t parent_pid;
+	int btest;
 
 	/* startup process */
 	/* flags.startup = true; */
@@ -31,25 +31,26 @@ int main(int ac, char *av[], char **env)
 		print_prompt();
 		actual = getline(&line, &len, stdin);
 		global.line_no++;
-		if (strcmp(line, exit) == 0)
-		        flags.exit = true;
+		/* if (strcmp(line, exit) == 0) */
+		/*         flags.exit = true; */
 		record_history(line, actual);
 		nl_remover(line);
 		token = parser(line, del);
+		btest = search_builtins(token);
+		printf("(main) btest: %d\n", btest); // debug
 		// call path_finder only if builtin returns 1 (not found)
-		/* path = path_finder(env); */
-		printf("(main) path: %s\n", path);
-		/* if path fails, search builtins */
-		/* final build: change to call forkExec from path_finder */
-
-		fork_exec(token[0], token, env); // arg1 to path when fixed
+		if (btest == 1)
+			/* path = path_finder(env); */
+			printf("(main) path: %s\n", path);
+			fork_exec(token[0], token, env); // arg1 to path when fixed
 		free(token[0]); // need function to free all **x
 
 		/*free(line); */
 		line = NULL;
 		len = 0;
+		printf("(main) flags.exit: %d\n", flags.exit); // debug
 	} while (flags.exit == false);
-	return (0);
+	return (global.exit_status);
 }
 
 /**

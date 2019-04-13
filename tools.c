@@ -113,7 +113,7 @@ char *_strdup(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		copy[i] = source[i];
-	copy[i + extra] = '\0';
+	copy[i] = '\0';
 	if (extra > 0)
 	{
 		i++;
@@ -202,6 +202,12 @@ void nl_cleaner(char *str)
 	printf("(post scrubber) string: %s\n", str); // debug
 }
 
+/**
+ * nl_remover - remove newlines from string
+ * @str: string to clense
+ *
+ * Return: VOID
+ */
 void nl_remover(char *str)
 {
 	char *finder, *dest;
@@ -216,6 +222,13 @@ void nl_remover(char *str)
 	*dest = '\0';
 }
 
+/**
+ * _strcat - concatonate two strings
+ * @dest: destination for concatination
+ * @src: string to add
+ *
+ * Return: pointer to dest string
+ */
 char *_strcat(char *dest, char *src)
 {
 	int i, x;
@@ -232,4 +245,40 @@ char *_strcat(char *dest, char *src)
 	}
 	dest[i] = '\0';
 	return (dest);
+}
+
+/**
+ * _atoi - convert letters to numbers
+ * @str: string to convert to numbers
+ *
+ * Return: int
+ */
+long int _atoi(char *str)
+{
+	int i = 0, num = 0;
+
+	if (str[0] == '+')
+		i++;
+	for (; str[i]; i++)
+		if (str[i] >= '0' || str[i] <= '9')
+			num = num * 10 + (str[i] - '0');
+
+	return (num);
+}
+
+/**
+ * fly_free - free arrays of pointers to strings
+ * @str: thing to set free
+ *
+ * Return: VOID
+ */
+void fly_free(char **str)
+{
+	int i = 0;
+
+	if (str == NULL || *str == NULL)
+		return;
+	for (; str[i]; i++)
+		free(str[i]);
+	free(str);
 }

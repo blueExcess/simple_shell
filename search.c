@@ -99,11 +99,7 @@ int search_builtins(char **av)
 	// need to set any flags for running builtins?
 
 	if (_strcmp(global.command, exit) == 0)
-	{
-		flags.exit == true;
-		// run exit function, call all exit conditions from there
-		return (0);
-	}
+		return (shell_exit(av));
 	if (_strcmp(global.command, cd) == 0)
 	{
 		// run cd function

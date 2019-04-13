@@ -55,6 +55,7 @@ void fork_exec(char *path, char **tokens,char **env)
 	{
 		execve(path, tokens, env);
 		perror("Execution failed\n");
+		// not our exit function
 	        exit(-1);
 	}
 	else
