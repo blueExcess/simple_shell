@@ -98,7 +98,7 @@ int *_astrlen(char **str)
  *
  * Return: pointer to begining of null-term string.
  */
-char *_strcpy(char *source, unsigned int extra)
+char *_strdup(char *source, unsigned int extra)
 {
 // all null bytes for all extra bytes
 	char *copy;
@@ -108,12 +108,18 @@ char *_strcpy(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		;
-	copy = malloc(sizeof(char) * i + extra); // + 1
+	copy = malloc(sizeof(char) * i + extra + 1);
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		copy[i] = source[i];
 	copy[i + extra] = '\0';
+	if (extra > 0)
+	{
+		i++;
+		for (extra += i; i < extra; i++)
+			copy[i] = '\0';
+	}
 
 	return(copy);
 }

@@ -35,7 +35,7 @@ int main(int ac, char *av[], char **env)
 		record_history(line, actual);
 		nl_remover(line);
 		token = parser(line, del);
-		path = path_finder(env);
+		/* path = path_finder(env); */
 		printf("(main) path: %s\n", path);
 		/* if path fails, search builtins */
 		/* final build: change to call forkExec from path_finder */

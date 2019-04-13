@@ -19,7 +19,7 @@ char *path_finder(char **env)
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
 	printf("path_str_ptr: %s\n", path_str_ptr); //debug
 /* copy path to new str */
-	path_str = _strcpy(path_str_ptr, 0); // null included?
+	path_str = _strdup(path_str_ptr, 0); // null included?
 	printf("path_str: %s\n", path_str);
 /* pass path to tokenizer */
 	parsed_path = parser(path_str, ":");
@@ -54,7 +54,7 @@ char *path_finder(char **env)
 		       globals.command, globals.command_length);
 
 		path_to_check = parsed_path[i];
-		path_to_check = _strcpy(parsed_path[i],
+		path_to_check = _strdup(parsed_path[i],
 					2 + globals.command_length);
 		printf("path_to_check: %s\n", path_to_check); //debug
 		str_len = path_lengths[i + 1];

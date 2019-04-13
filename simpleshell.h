@@ -36,7 +36,7 @@ unsigned int _wordCount(char *str);
 int _strcmp(char *s1, char *s2);
 int _strlen(char *str);
 int *_astrlen(char **str);
-char *_strcpy(char *source, unsigned int extra);
+char *_strdup(char *source, unsigned int extra);
 void _strtostr(char *source, char *dest);
 char *_strchr(char *str, int c);
 void nl_cleaner(char *str);

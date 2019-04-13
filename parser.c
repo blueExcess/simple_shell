@@ -22,13 +22,13 @@ char **parser(char *string, char *delim)
 	}
 	if (*tokened[0] != '/')
 	{
-		command = malloc(sizeof(char) * _strlen(tokened[0])); // NP
-		/* NOT FREED */
-		if (command == NULL)
-			return (NULL); // set error flag?
-		command = tokened[0]; // correct?
-		globals.command = command;
-		globals.command_length = _strlen(command);
+		/* command = malloc(sizeof(char) * _strlen(tokened[0]) + 1); // NP */
+		/* /\* NOT FREED *\/ */
+		/* if (command == NULL) */
+		/* 	return (NULL); // set error flag? */
+		globals.command = _strdup(tokened[0], 0);
+		/* globals.command = command; */
+		globals.command_length = _strlen(globals.command);
 	}
 	return (tokened);
 }
