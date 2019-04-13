@@ -30,19 +30,20 @@ int main(int ac, char *av[], char **env)
 		/* write(2, prompt, 4); */
 		print_prompt();
 		actual = getline(&line, &len, stdin);
-		globals.line_no++;
+		global.line_no++;
 		if (strcmp(line, exit) == 0)
 		        flags.exit = true;
 		record_history(line, actual);
 		nl_remover(line);
 		token = parser(line, del);
+		// call path_finder only if builtin returns 1 (not found)
 		/* path = path_finder(env); */
 		printf("(main) path: %s\n", path);
 		/* if path fails, search builtins */
 		/* final build: change to call forkExec from path_finder */
 
-		fork_exec(path, token, env);
-		free(path);
+		fork_exec(token[0], token, env); // arg1 to path when fixed
+		free(token[0]); // need function to free all **x
 
 		/*free(line); */
 		line = NULL;

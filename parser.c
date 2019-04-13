@@ -26,9 +26,9 @@ char **parser(char *string, char *delim)
 		/* /\* NOT FREED *\/ */
 		/* if (command == NULL) */
 		/* 	return (NULL); // set error flag? */
-		globals.command = _strdup(tokened[0], 0);
-		/* globals.command = command; */
-		globals.command_length = _strlen(globals.command);
+		global.command = _strdup(tokened[0], 0);
+		/* global.command = command; */
+		global.command_length = _strlen(global.command);
 	}
 	return (tokened);
 }
@@ -37,8 +37,6 @@ char **parser(char *string, char *delim)
 /*fork/exec function*/
 void fork_exec(char *path, char **tokens,char **env)
 {
-// where do you call fork or execve or wait?
-// currently I think it will only do one of the three per call (no loop)
 	pid_t child;
 	int status;
 

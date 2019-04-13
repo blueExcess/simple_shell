@@ -32,6 +32,7 @@ void fork_exec(char *path, char **token, char **env);
 
 /* search.c */
 char *path_finder(char **env);
+int search_builtins(char **args);
 
 /* tools.c */
 unsigned int _wordCount(char *str);
@@ -65,15 +66,15 @@ struct flags
 }flags;
 
 /**
- * globals - global variables (not bool flags)
+ * global - global variables (not bool flags)
  * @command: name of command that's been parsed
  */
-struct globals
+struct global
 {
 	char *command;
 	int command_length;
 	int line_no;
 
-}globals;
+}global;
 
 #endif

@@ -46,16 +46,16 @@ char *path_finder(char **env)
 /* loop will end when existence is verified or end of array */
 	do{
 		/* path_to_check = malloc(sizeof(char) * path_lengths[i + 1] */
-		/* 	       + 2 + sizeof(char) * globals.command_length); */
+		/* 	       + 2 + sizeof(char) * global.command_length); */
 		/* if (path_to_check == NULL) */
 		/* 	return (NULL); // RTP */
 		/* DEBUG */
-		printf("globals.command: %s\nglobals.command_len: %d\n",
-		       globals.command, globals.command_length);
+		printf("global.command: %s\nglobal.command_len: %d\n",
+		       global.command, global.command_length);
 
 		path_to_check = parsed_path[i];
 		path_to_check = _strdup(parsed_path[i],
-					2 + globals.command_length);
+					2 + global.command_length);
 		printf("path_to_check: %s\n", path_to_check); //debug
 		str_len = path_lengths[i + 1];
 		printf("str_len: %d\n", str_len); // debug
@@ -63,7 +63,7 @@ char *path_finder(char **env)
 		path_to_check[str_len + 1] = '\0';
 		printf("path_to_check: %s\n", path_to_check); // debug
 		printf("strlen: %zd\n", strlen(path_to_check)); // debug
-		path_to_check = _strcat(path_to_check, globals.command);
+		path_to_check = _strcat(path_to_check, global.command);
 		printf("path_to_check: %s\n", path_to_check); // debug
 		printf("strlen: %zd\n", strlen(path_to_check)); // debug
 		access_check = access(path_to_check, F_OK);
@@ -78,4 +78,65 @@ char *path_finder(char **env)
 	if (i == num_tokens)
 		return (NULL); // will search builtins
 	return (path_to_check);
+}
+
+
+/**
+ * search_builtins - search and execute any builtins
+ * @argv: list of all tokenized args
+ *
+ * Return: 0 on success, 1 if not found, -1 if error
+ */
+int search_builtins(char **av)
+{
+/* too long -- may need second builtin search function */
+	extern char **environ;
+	char **cp_env = environ;
+	char *exit = "exit", *cd = "cd", *env = "env", *setenv = "setenv";
+	char *unsetenv = "unsetenv", *help = "help", *history = "history";
+	int error = 0;
+
+	// need to set any flags for running builtins?
+
+	if (_strcmp(global.command, exit) == 0)
+	{
+		flags.exit == true;
+		// run exit function, call all exit conditions from there
+		return (0);
+	}
+	if (_strcmp(global.command, cd) == 0)
+	{
+		// run cd function
+		// set any flags?
+		return (0);
+	}
+	if (_strcmp(global.command, env) == 0)
+	{
+		// run env function
+		return (0);
+	}
+	if (_strcmp(global.command, setenv) == 0)
+	{
+		// run setenv function
+		return (0);
+	}
+	if (_strcmp(global.command, unsetenv) == 0)
+	{
+		// run unsetenv function
+		return (0);
+	}
+	if (_strcmp(global.command, help) == 0)
+	{
+		// run help function
+		return (0);
+	}
+	if (_strcmp(global.command, history) == 0)
+	{
+		// run history function
+		return (0);
+	}
+/* exe error */
+	if (error)
+		return (-1); // and set errno flags?
+	return (1); // builtin not found
 }
