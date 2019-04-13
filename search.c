@@ -34,7 +34,7 @@ char *path_finder(char **env)
 	path_lengths = _astrlen(parsed_path);
 
 	/* DEBUG */
-	for (x = 0; x < path_lengths[0]; x++)
+	for (x = 0; x <= path_lengths[0]; x++)
 		printf("path_length[%d]: %d\n", x, path_lengths[x]);
 
 /* get number of tokens in path */
@@ -45,23 +45,33 @@ char *path_finder(char **env)
 /* add '/' and command, then check if file exists. */
 /* loop will end when existence is verified or end of array */
 	do{
-		path_to_check = malloc(sizeof(char) * path_lengths[i + 1]
-			       + 2 + sizeof(char) * globals.command_length);
-		if (path_to_check == NULL)
-			return (NULL); // RTP
+		/* path_to_check = malloc(sizeof(char) * path_lengths[i + 1] */
+		/* 	       + 2 + sizeof(char) * globals.command_length); */
+		/* if (path_to_check == NULL) */
+		/* 	return (NULL); // RTP */
 		/* DEBUG */
 		printf("globals.command: %s\nglobals.command_len: %d\n",
 		       globals.command, globals.command_length);
 
 		path_to_check = parsed_path[i];
+		path_to_check = _strcpy(parsed_path[i],
+					2 + globals.command_length);
 		printf("path_to_check: %s\n", path_to_check); //debug
 		str_len = path_lengths[i + 1];
+		printf("str_len: %d\n", str_len); // debug
 		path_to_check[str_len] = '/';
-		temp = (path_to_check + str_len + 1);
-		_strtostr(globals.command, temp);
+		path_to_check[str_len + 1] = '\0';
+		printf("path_to_check: %s\n", path_to_check); // debug
+		printf("strlen: %zd\n", strlen(path_to_check)); // debug
+		path_to_check = _strcat(path_to_check, globals.command);
+		printf("path_to_check: %s\n", path_to_check); // debug
+		printf("strlen: %zd\n", strlen(path_to_check)); // debug
 		access_check = access(path_to_check, F_OK);
-		if (access_check)
+		if (access_check == 0)
+		{
+			puts("passed access check"); // debug
 			free(path_to_check);
+		}
 		i++;
 	} while (access_check || i < num_tokens);
 /* for testing, will return to main. Actual will sent to forkExec */

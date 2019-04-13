@@ -41,7 +41,7 @@ void _strtostr(char *source, char *dest);
 char *_strchr(char *str, int c);
 void nl_cleaner(char *str);
 void nl_remover(char *str);
-
+char *_strcat(char *dest, char *src);
 /* builtins.c */
 
 

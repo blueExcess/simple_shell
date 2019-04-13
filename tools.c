@@ -81,7 +81,7 @@ int *_astrlen(char **str)
 	for (x = 0; str[x]; x++)
 		;
 	arr[0] = x;
-	for (i = 0; str[i - 1]; i++)
+	for (i = 0; str[i]; i++)
 	{
 		for (j = 0; str[i][j]; j++)
 			;
@@ -100,6 +100,7 @@ int *_astrlen(char **str)
  */
 char *_strcpy(char *source, unsigned int extra)
 {
+// all null bytes for all extra bytes
 	char *copy;
 	int i;
 
@@ -107,7 +108,7 @@ char *_strcpy(char *source, unsigned int extra)
 		return (NULL);
 	for (i = 0; source[i]; i++)
 		;
-	copy = malloc(sizeof(char) * i + 1 + extra);
+	copy = malloc(sizeof(char) * i + extra); // + 1
 	if (copy == NULL)
 		return (NULL);
 	for (i = 0; source[i]; i++)
@@ -207,4 +208,22 @@ void nl_remover(char *str)
 			dest++;
 	}
 	*dest = '\0';
+}
+
+char *_strcat(char *dest, char *src)
+{
+	int i, x;
+
+	i = x = 0;
+
+	while (dest[i] != '\0')
+	{
+		i++;
+	}
+	while (src[x] != '\0')
+	{
+		dest[i++] = src[x++];
+	}
+	dest[i] = '\0';
+	return (dest);
 }
