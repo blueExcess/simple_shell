@@ -105,12 +105,7 @@ int search_builtins(char **av)
 	if (_strcmp(global.command, exit) == 0)
 		return (shell_exit(av));
 	if (_strcmp(global.command, cd) == 0)
-	{
-		_cd(av);
-		// run cd function
-		// set any flags?
-		return (0);
-	}
+		return (_cd(av));
 	if (_strcmp(global.command, env) == 0)
 	{
 		// run env function
