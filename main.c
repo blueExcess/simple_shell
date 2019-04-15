@@ -31,10 +31,10 @@ int main(int ac, char *av[], char **env)
 		print_prompt();
 		actual = getline(&line, &len, stdin);
 		global.line_no++;
-		/* if (strcmp(line, exit) == 0) */
-		/*         flags.exit = true; */
 		record_history(line, actual);
 		nl_remover(line);
+		if (*line == '\0') // better to do check in word count
+			continue;
 		token = parser(line, del);
 		btest = search_builtins(token);
 		printf("(main) btest: %d\n", btest); // debug
@@ -42,7 +42,7 @@ int main(int ac, char *av[], char **env)
 		if (btest == 1)
 		{
 			path = path_finder(env);
-			printf("(main) path: %s\n", path);
+			printf("(main) path: %s\n", path); // debug
 			fork_exec(token[0], token, env); // arg1 to path when fixed
 		}
 		free(token[0]); // need function to free all **x
@@ -141,7 +141,7 @@ void startup(int ac, char **av)
 /* may end up tx startup sequences of functions here */
 
 // check if passed file to hsh
-	if (ac > 0)
+	if (ac > 1)
 		global.input = open(av[1], O_RDONLY);
 	else
 		global.input = STDIN_FILENO;
