@@ -4,7 +4,7 @@
 /* word count */
 unsigned int _wordCount(char *str)
 {
-	char *delim = "\n \t";
+	char *delim = "\n \t :";
 	unsigned int wrdCnt, index, flag;
 
 	index = 0;
@@ -16,10 +16,14 @@ unsigned int _wordCount(char *str)
 		if (flag == 0 &&
 		    (str[index] == delim[0]
 		     || str[index] == delim[1]
-		     || str[index] == delim[2])
+		     || str[index] == delim[2]
+		     || str[index] == delim[3]
+		     || str[index] == delim[4])
 		    && str[index + 1] != delim[0]
 		    && str[index + 1] != delim[1]
-		    && str[index + 1] != delim[2])
+		    && str[index + 1] != delim[2]
+		    && str(index + 1] != delim[3]
+		    && str(index + 1] != delim[4])
 		{
 			flag = 1;
 			wrdCnt++;
@@ -281,4 +285,52 @@ void fly_free(char **str)
 	for (; str[i]; i++)
 		free(str[i]);
 	free(str);
+}
+void updateDir(char *directory, char *beginning)
+{
+	int length, index = 0, count = 0;
+	char *printDir;
+
+	length = _strlen(directory) + _strlen(beginning);
+	printDir = malloc(sizeof(char) * length);
+
+	for (index = 0; index < length; index++)
+	{
+		if (index < _strlen(beginning))
+			printDir[index] = beginning[index];
+		else
+			printDir[index] = beginning[count++];
+	}
+	printDir[index] = '\0';
+	index = 0;
+	length = _strlen(beginning);
+	while (__environ[index])
+	{
+		if (strncmp(beginning, __environ[index++], length) == 0)
+		{
+			__environ[index] = printDir;
+			break;
+		}
+		index++;
+	}
+}
+
+char *cpyPath(char *input)
+{
+	int index = 0, length = 0;
+	char *dest;
+
+	length = _strlen(input);
+	while (__environ[index])
+	{
+		if (strncmp(input, __environ[index], length) == 0)
+		{
+			dest = __environ[index];
+			break;
+		}
+		index++;
+	}
+	dest = dest + length;
+
+	return (dest);
 }

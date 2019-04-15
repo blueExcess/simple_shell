@@ -1,17 +1,17 @@
 #include "simpleshell.h"
 
-void _cd(char **tokens)
+int _cd(char **tokens)
 {
 	int index = 0;
 	char *newPath;
 	char buffer[2048];
 
-	while (tokens[index++] != '\0')
+	while (tokens[++index])
 		;
 	if (index < 2)
 	{
 		newPath = cpyPath("HOME=");
-		getcwd(buffer, sizeof(cwd));
+		getcwd(buffer, sizeof(tokens));
 		updateDir(buffer, "OLDPWD=");
 		if (chdir(newPath) != 0)
 		{
@@ -22,10 +22,10 @@ void _cd(char **tokens)
 	}
 	else
 	{
-		if (args[1][0] == '-')
+		if (tokens[1][0] == '-')
 		{
 			newPath = cpyPath("OLDPWD=");
-			getcwd(buffer, sizeof(cwd));
+			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "OLDPWD=");
 			if (chdir(newPath) != 0)
 				perror("");
@@ -36,11 +36,11 @@ void _cd(char **tokens)
 		{
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "OLDPWD=");
-			if (chdir(tokens[1] != 0))
+			if (chdir(tokens[1] != '\0'))
 				perror("");
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "PWD=");
 		}
 	}
-	exit (0);
+	return (1);
 }
