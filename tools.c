@@ -287,8 +287,10 @@ void fly_free(char **str)
 }
 void updateDir(char *directory, char *beginning)
 {
+	extern char **environ;
 	int length, index = 0, count = 0;
-	char *printDir;
+	char *printDir, **env;
+	env = environ;
 
 	length = _strlen(directory) + _strlen(beginning);
 	printDir = malloc(sizeof(char) * length);
@@ -303,11 +305,11 @@ void updateDir(char *directory, char *beginning)
 	printDir[index] = '\0';
 	index = 0;
 	length = _strlen(beginning);
-	while (__environ[index])
+	while (env[index])
 	{
-		if (strncmp(beginning, __environ[index++], length) == 0)
+		if (strncmp(beginning, env[index++], length) == 0)
 		{
-			__environ[index] = printDir;
+			env[index] = printDir;
 			break;
 		}
 		index++;
@@ -316,15 +318,17 @@ void updateDir(char *directory, char *beginning)
 
 char *cpyPath(char *input)
 {
+	extern char **environ;
 	int index = 0, length = 0;
-	char *dest;
+	char *dest, **env;
+	env = environ;
 
 	length = _strlen(input);
-	while (__environ[index])
+	while (env[index])
 	{
-		if (strncmp(input, __environ[index], length) == 0)
+		if (strncmp(input, env[index], length) == 0)
 		{
-			dest = __environ[index];
+			dest = env[index];
 			break;
 		}
 		index++;

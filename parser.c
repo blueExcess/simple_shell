@@ -3,8 +3,11 @@
 
 char **parser(char *string, char *delim)
 {
+	extern char **environ;
 	unsigned int wrdCnt, index;
-	char **tokened, *token, *command;
+	char **tokened, *token, *command, **envc;
+
+	envc = environ;
 
 	wrdCnt = _wordCount(string);
 	tokened = malloc((wrdCnt + 1) * sizeof(char *));
@@ -30,6 +33,9 @@ char **parser(char *string, char *delim)
 		/* global.command = command; */
 		global.command_length = _strlen(global.command);
 	}
+	else if (*tokened[0] == '/')
+		if (!(access(tokened[0], F_OK)))
+			fork_exec(tokened[0], tokened, envc);
 	return (tokened);
 }
 
@@ -50,6 +56,7 @@ void fork_exec(char *path, char **tokens,char **env)
 	if (child == -1)
 	{
 		perror("fork failed\n");
+		exit (103);
 	}
 	if (child == 0)
 	{
