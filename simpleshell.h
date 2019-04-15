@@ -36,6 +36,7 @@ int search_builtins(char **args);
 
 /* builtins.c */
 int shell_exit(char **av);
+int _cd(char **tokens);
 
 /* tools.c */
 unsigned int _wordCount(char *str);
@@ -50,6 +51,8 @@ void nl_remover(char *str);
 char *_strcat(char *dest, char *src);
 long int _atoi(char *str);
 void fly_free(char **str);
+char *cpyPath(char *input);
+void updateDir(char *directory, char *beginning);
 
 
 
