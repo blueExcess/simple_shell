@@ -23,7 +23,7 @@ char **parser(char *string, char *delim)
 	{
 		tokened[index] = token = strtok('\0', delim);
 	}
-	if (*tokened[0] != '/')
+	if (tokened[0][0] != '/')
 	{
 		/* command = malloc(sizeof(char) * _strlen(tokened[0]) + 1); // NP */
 		/* /\* NOT FREED *\/ */
@@ -60,11 +60,12 @@ void fork_exec(char *path, char **tokens,char **env)
 	}
 	if (child == 0)
 	{
-		execve(path, tokens, env);
-		perror("Execution failed\n");
+		if (execve(path, tokens, env) == -1)
+			perror("Execution failed\n");
 		// not our exit function
 	        exit(-1);
 	}
 	else
 		wait(&status);
+	return;
 }
