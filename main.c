@@ -24,7 +24,7 @@ int main(int ac, char *av[], char **env)
 	/* if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1)) */
 	/* 	flags.interactive = true; */
 
-	startup();
+	startup(ac, av);
 
 	do {
 		/* write(2, prompt, 4); */
@@ -40,7 +40,7 @@ int main(int ac, char *av[], char **env)
 		printf("(main) btest: %d\n", btest); // debug
 		// call path_finder only if builtin returns 1 (not found)
 		if (btest == 1)
-			/* path = path_finder(env); */
+			path = path_finder(env);
 			printf("(main) path: %s\n", path);
 			fork_exec(token[0], token, env); // arg1 to path when fixed
 		free(token[0]); // need function to free all **x
@@ -131,17 +131,26 @@ void print_prompt(void)
  *
  * Return: VOID
  */
-void startup(void)
+void startup(int ac, char **av)
 {
 	/* set startup flag */
 	flags.startup = true;
 
-	/* run startup functions */
 /* may end up tx startup sequences of functions here */
 
+// check if passed file to hsh
+	if (ac > 0)
+		global.input = open(av[1], O_RDONLY);
+	else
+		global.input = STDIN_FILENO;
+
 // check if interactive
-	if (isatty(STDOUT_FILENO) == 1 && isatty(STDIN_FILENO) == 1)
+	if (isatty(STDOUT_FILENO) == 1 && isatty(global.input) == 1)
+	{
 		flags.interactive = true;
+		/* signal(SIGINT, &sigint_handler); // what's this do? */
+	}
+
 //set up record keeping
 	record_history(NULL, 0);
 
