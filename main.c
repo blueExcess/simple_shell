@@ -40,9 +40,11 @@ int main(int ac, char *av[], char **env)
 		printf("(main) btest: %d\n", btest); // debug
 		// call path_finder only if builtin returns 1 (not found)
 		if (btest == 1)
+		{
 			path = path_finder(env);
 			printf("(main) path: %s\n", path);
 			fork_exec(token[0], token, env); // arg1 to path when fixed
+		}
 		free(token[0]); // need function to free all **x
 
 		/*free(line); */
@@ -123,7 +125,7 @@ void print_prompt(void)
 	static char *prompt = "($) ";
 
 	if (flags.interactive == true)
-		write(2, prompt, 4);
+		write(STDERR_FILENO, prompt, 4);
 }
 
 /**
@@ -148,7 +150,7 @@ void startup(int ac, char **av)
 	if (isatty(STDOUT_FILENO) == 1 && isatty(global.input) == 1)
 	{
 		flags.interactive = true;
-		/* signal(SIGINT, &sigint_handler); // what's this do? */
+		signal(SIGINT, &sig_handler);
 	}
 
 //set up record keeping
@@ -156,4 +158,11 @@ void startup(int ac, char **av)
 
 	/* unset startup flag */
 	flags.startup = false;
+}
+
+void sig_handler(int n)
+{
+	char *prompt = "/n($) ";
+
+	write(STDERR_FILENO, prompt, 5);
 }

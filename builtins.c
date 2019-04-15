@@ -81,11 +81,10 @@ int shell_exit(char **av)
 			return (2);
 		}
 	}
-
 	flags.exit = true;
 	record_history(NULL, 0);
 	// call any other functions that require cleanup
-
+	close(global.input);
 	global.exit_status = value & 0377;
 	return (0);
 }

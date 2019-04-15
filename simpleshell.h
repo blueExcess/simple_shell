@@ -25,6 +25,7 @@ int main(int ac, char *av[],char **env);
 void record_history(char *input, ssize_t len);
 void print_prompt(void);
 void startup(int ac, char **av);
+void sig_handler(int n);
 
 /* parser.c */
 char **parser(char *str, char *delim);
