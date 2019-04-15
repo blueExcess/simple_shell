@@ -22,8 +22,8 @@ unsigned int _wordCount(char *str)
 		    && str[index + 1] != delim[0]
 		    && str[index + 1] != delim[1]
 		    && str[index + 1] != delim[2]
-		    && str(index + 1] != delim[3]
-		    && str(index + 1] != delim[4])
+		    && str[index + 1] != delim[3]
+		    && str[index + 1] != delim[4])
 		{
 			flag = 1;
 			wrdCnt++;
