@@ -18,16 +18,17 @@ char *path_finder(char **env)
 /* set pointer to = in env and move to next value */
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
 	printf("path_str_ptr: %s\n", path_str_ptr); //debug
+
 /* copy path to new str */
-	path_str = _strdup(path_str_ptr, 0); // null included?
-	printf("path_str: %s\n", path_str);
+	path_str = _strdup(path_str_ptr, 0);
+	printf("path_str: %s\n", path_str); // debug
+
 /* pass path to tokenizer */
 	parsed_path = parser(path_str, ":");
 
 	/* DEBUG */
 	for (; parsed_path[x]; x++)
 		printf("parsed_path[%d]: %s\n", x, parsed_path[x]);
-	/* DEBUG */
 
 /*	free(path_str);*/
 /* get length of every string after parsing */
@@ -53,10 +54,13 @@ char *path_finder(char **env)
 		printf("global.command: %s\nglobal.command_len: %d\n",
 		       global.command, global.command_length);
 
+		printf("parsed_path[%d]: %s\n", i, parsed_path[i]); // debug
 		path_to_check = parsed_path[i];
+		printf("(after sets new path to check) i: %d\n", i); // debug
+		printf("path_to_check: %s, len: %zd\n", path_to_check, strlen(path_to_check)); // debug
 		path_to_check = _strdup(parsed_path[i],
 					2 + global.command_length);
-		printf("path_to_check: %s\n", path_to_check); //debug
+		printf("path_to_check: %s\n", path_to_check); // debug
 		str_len = path_lengths[i + 1];
 		printf("str_len: %d\n", str_len); // debug
 		path_to_check[str_len] = '/';

@@ -104,27 +104,37 @@ int *_astrlen(char **str)
  */
 char *_strdup(char *source, unsigned int extra)
 {
-// all null bytes for all extra bytes
 	char *copy;
 	int i;
 
+	puts("(strdup) entry"); // debug
 	if (source == NULL)
 		return (NULL);
+	printf("(strdup) source: %s, len: %zd\n", source, strlen(source)); // debug
+	puts("(strdup) check 1"); // debug
 	for (i = 0; source[i]; i++)
 		;
+	puts("(strdup) check 2"); // debug
 	copy = malloc(sizeof(char) * i + extra + 1);
+	puts("(strdup) check 3"); // debug
 	if (copy == NULL)
 		return (NULL);
+	puts("(strdup) check 4"); // debug
 	for (i = 0; source[i]; i++)
 		copy[i] = source[i];
+	puts("(strdup) check 5"); // debug
 	copy[i] = '\0';
+	puts("(strdup) check 6"); // debug
 	if (extra > 0)
 	{
 		i++;
+		puts("(strdup) check 7"); // debug
 		for (extra += i; i < extra; i++)
 			copy[i] = '\0';
+		puts("(strdup) check 8"); // debug
 	}
 
+	puts("(strdup) check 9"); // debug
 	return(copy);
 }
 

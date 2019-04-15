@@ -10,12 +10,15 @@
 int shell_exit(char **av)
 {
 	char *status = av[1];
+	char *error = "exit: Illegal number: ", *ferror;
 	int i = 0;
 	long int value = 0;
 	bool err = false;
 
 	if (status)
 	{
+		ferror = _strdup(error, _strlen(status));
+		ferror = _strcat(ferror, status);
 		for (; status[i]; i++)
 			if ((status[i] == '+' && i != 0) ||
 			    (status[i] < '0' || status[i] > '9'))
@@ -29,9 +32,11 @@ int shell_exit(char **av)
 			value = _atoi(status);
 		if (value < 0 || value > INT_MAX || err)
 		{
-			// call perror
+			write(2, ferror, _strlen(ferror));
+			write(2, "\n", 2);
+			// call error writing function
 			// sh: line: exit: Illegal number: status
-			return (-1);
+			return (2);
 		}
 	}
 
