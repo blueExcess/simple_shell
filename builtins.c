@@ -14,9 +14,7 @@ int _cd(char **tokens)
 		getcwd(buffer, sizeof(tokens));
 		updateDir(buffer, "OLDPWD=");
 		if (chdir(newPath) != 0)
-		{
 			perror("");
-		}
 		getcwd(buffer, sizeof(buffer));
 		updateDir(buffer, "PWD=");
 	}
@@ -36,7 +34,7 @@ int _cd(char **tokens)
 		{
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "OLDPWD=");
-			if (chdir(tokens[1] != '\0'))
+			if (chdir(tokens[1]))
 				perror("");
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "PWD=");
