@@ -46,34 +46,29 @@ char *path_finder(char **env)
 /* add '/' and command, then check if file exists. */
 /* loop will end when existence is verified or end of array */
 	do{
-		/* path_to_check = malloc(sizeof(char) * path_lengths[i + 1] */
-		/* 	       + 2 + sizeof(char) * global.command_length); */
-		/* if (path_to_check == NULL) */
-		/* 	return (NULL); // RTP */
 		/* DEBUG */
 		printf("global.command: %s\nglobal.command_len: %d\n",
 		       global.command, global.command_length);
 
-		printf("parsed_path[%d]: %s\n", i, parsed_path[i]); // debug
+		/* printf("parsed_path[%d]: %s\n", i, parsed_path[i]); // debug */
 		path_to_check = parsed_path[i];
-		printf("(after sets new path to check) i: %d\n", i); // debug
-		printf("path_to_check: %s, len: %zd\n", path_to_check, strlen(path_to_check)); // debug
+		/* printf("path_to_check: %s, len: %zd\n", path_to_check, strlen(path_to_check)); // debug */
 		path_to_check = _strdup(parsed_path[i],
 					2 + global.command_length);
-		printf("path_to_check: %s\n", path_to_check); // debug
+		/* printf("path_to_check: %s\n", path_to_check); // debug */
 		str_len = path_lengths[i + 1];
-		printf("str_len: %d\n", str_len); // debug
+		/* printf("str_len: %d\n", str_len); // debug */
 		path_to_check[str_len] = '/';
-		path_to_check[str_len + 1] = '\0';
-		printf("path_to_check: %s\n", path_to_check); // debug
-		printf("strlen: %zd\n", strlen(path_to_check)); // debug
+		/* path_to_check[str_len + 1] = '\0'; */
+		/* printf("path_to_check: %s\n", path_to_check); // debug */
+		/* printf("strlen: %zd\n", strlen(path_to_check)); // debug */
 		path_to_check = _strcat(path_to_check, global.command);
-		printf("path_to_check: %s\n", path_to_check); // debug
-		printf("strlen: %zd\n", strlen(path_to_check)); // debug
+		/* printf("path_to_check: %s\n", path_to_check); // debug */
+		/* printf("strlen: %zd\n", strlen(path_to_check)); // debug */
 		access_check = access(path_to_check, F_OK);
 		if (access_check == 0)
 		{
-			puts("passed access check"); // debug
+			/* puts("passed access check"); // debug */
 			free(path_to_check);
 		}
 		i++;
