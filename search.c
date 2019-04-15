@@ -101,7 +101,7 @@ int search_builtins(char **av)
 	int error = 0;
 
 	// need to set any flags for running builtins?
-
+	printf("(search_builtins) entered function");
 	if (_strcmp(global.command, exit) == 0)
 		return (shell_exit(av));
 	if (_strcmp(global.command, cd) == 0)

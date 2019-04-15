@@ -17,13 +17,6 @@ int main(int ac, char *av[], char **env)
 	pid_t parent_pid;
 	int btest;
 
-	/* startup process */
-	/* flags.startup = true; */
-	/* record_history(line, len); */
-	/* flags.startup = false; */
-	/* if (isatty(STDOUT_FILENO) == 1 && (isatty(STDIN_FILENO) == 1)) */
-	/* 	flags.interactive = true; */
-
 	startup(ac, av);
 
 	do {
