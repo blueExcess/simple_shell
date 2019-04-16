@@ -62,7 +62,7 @@ int shell_exit(char **av)
 		ferror = _strdup(error, _strlen(status));
 		ferror = _strcat(ferror, status);
 		for (; status[i]; i++)
-			if ((status[i] == '+' && i != 0) ||
+			if ((status[i] != '+' && i != 0) ||
 			    (status[i] < '0' || status[i] > '9'))
 			{
 				err = true;
@@ -86,5 +86,25 @@ int shell_exit(char **av)
 	// call any other functions that require cleanup
 	close(global.input);
 	global.exit_status = value & 0377;
+	return (0);
+}
+
+/**
+ * _env - print out all environment values
+ *
+ * Return: 0 on success
+ */
+int _env(void)
+{
+	extern char **environ;
+	char **c_env = environ;
+	int *env_len, x = 0, i = 0;
+
+	env_len = _astrlen(c_env);
+	for (; c_env[i]; i++)
+	{
+		write(STDOUT_FILENO, c_env[i], env_len[i + 1]);
+		write(STDOUT_FILENO, "\n", 2);
+	}
 	return (0);
 }
