@@ -329,7 +329,7 @@ char *cpyPath(char *input)
 	length = _strlen(input);
 	while (env[index])
 	{
-		if (strncmp(input, env[index], length) == 0)
+		if (_strcmp(input, env[index]) == 0)
 		{
 			dest = env[index];
 			break;
