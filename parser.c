@@ -90,7 +90,8 @@ char *com_remover(char *path)
 		count = index;
 		if (path[index] == '#')
 		{
-			if (path[--count] == ' ' || path[++count] == ' ')
+			if (path[--count] == ' ' ||
+			    (path[--count] && path[++count] == ' '))
 			{
 				path[index] = '\0';
 			}
