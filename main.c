@@ -36,7 +36,7 @@ int main(int ac, char *av[], char **env)
 		{
 			path = path_finder(env);
 			printf("(main) path: %s\n", path); // debug
-			fork_exec(token[0], token, env); // arg1 to path when fixed
+			fork_exec(path, token, env); // arg1 to path when fixed
 		}
 		free(token[0]); // need function to free all **x
 
