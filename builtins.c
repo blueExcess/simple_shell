@@ -61,8 +61,10 @@ int shell_exit(char **av)
 	{
 		ferror = _strdup(error, _strlen(status));
 		ferror = _strcat(ferror, status);
+		if (status[0] == '+')
+			status++;
 		for (; status[i]; i++)
-			if ((status[i] != '+' && i != 0) ||
+			if ((status[i] == '+' && i != 0) ||
 			    (status[i] < '0' || status[i] > '9'))
 			{
 				err = true;

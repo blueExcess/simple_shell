@@ -66,7 +66,7 @@ char *path_finder(char **env)
 		/* printf("path_to_check: %s\n", path_to_check); // debug */
 		/* printf("strlen: %zd\n", strlen(path_to_check)); // debug */
 		access_check = access(path_to_check, F_OK);
-		if (access_check == 0)
+		if (access_check != 0)
 		{
 			/* puts("passed access check"); // debug */
 			free(path_to_check);
