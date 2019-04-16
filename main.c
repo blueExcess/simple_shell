@@ -46,6 +46,8 @@ int main(int ac, char *av[], char **env)
 		/*free(line); */
 		line = NULL;
 		len = 0;
+		free(global.command);
+		global.command = NULL;
 		printf("(main) flags.exit: %d\n", flags.exit); // debug
 	} while (flags.exit == false);
 	return (global.exit_status);

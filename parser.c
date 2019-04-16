@@ -34,7 +34,7 @@ char **parser(char *string, char *delim)
 		global.command_length = _strlen(global.command);
 	}
 	else if (*tokened[0] == '/')
-		if (!(access(tokened[0], F_OK)))
+		if ((access(tokened[0], F_OK)) == 0)
 			fork_exec(tokened[0], tokened, envc);
 	return (tokened);
 }

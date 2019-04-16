@@ -40,7 +40,7 @@ int _cd(char **tokens)
 			updateDir(buffer, "PWD=");
 		}
 	}
-	return (1);
+	return (0);
 }
 
 /**
