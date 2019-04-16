@@ -88,4 +88,6 @@ struct global
 
 }global;
 
+extern char **environ;
+
 #endif
