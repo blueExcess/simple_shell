@@ -11,8 +11,9 @@
 char **parser(char *string, char *delim)
 {
 	unsigned int wrdCnt, index;
-	char **tokened, *token, *command, **envc;
+	char **tokened, *token, *command, **envc, *comment;
 
+	string = com_remover(string);
 	envc = environ;
 
 	wrdCnt = _wordCount(string);

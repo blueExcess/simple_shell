@@ -67,6 +67,12 @@ Examples of built-in commands:
 \&/home/user/holberton/simple_shell
 .br
 \&($)
+.SH ENVIRONMENT
+The environment is a list of name-value pairs that are passed to an executed program in the same way a normal argument would be passed. You can see
+.B exec(2)
+and
+.B environ(5)
+for more details.
 .SH SEE ALSO
 .I bash(1) sh(1)
 .SH BUGS
