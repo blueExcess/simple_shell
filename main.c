@@ -41,7 +41,7 @@ int main(int ac, char *av[], char **env)
 			printf("(main) path: %s\n", path); // debug
 			fork_exec(path, token, env); // arg1 to path when fixed
 		}
-		free(token[0]); // need function to free all **x
+		free(path); // need function to free all **x
 
 		/*free(line); */
 		line = NULL;
@@ -157,6 +157,11 @@ void startup(int ac, char **av)
 	/* unset startup flag */
 	flags.startup = false;
 }
+
+/**
+ * sig_handler - stops ctrl+c from exiting shell
+ * @n: is the actual command coming in from the OS signal
+ */
 
 void sig_handler(int n)
 {

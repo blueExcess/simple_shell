@@ -1,9 +1,15 @@
 /* file for parsing and calling functions */
 #include "simpleshell.h"
 
+/**
+ * parser - parses a single string in to strings inside a string
+ * @string: incoming string
+ * @delim: delimiter to parse string with
+ * Return: returns a double pointer containing tokens
+ */
+
 char **parser(char *string, char *delim)
 {
-	extern char **environ;
 	unsigned int wrdCnt, index;
 	char **tokened, *token, *command, **envc;
 
@@ -40,8 +46,14 @@ char **parser(char *string, char *delim)
 }
 
 
-/*fork/exec function*/
-void fork_exec(char *path, char **tokens,char **env)
+/**
+ * fork_exec - creates a child process and executes the written command if it's external
+ * @path: path to check process with
+ * @token: arguments from command line
+ * @env: enviroment
+ * Return: void
+ */
+void fork_exec(char *path, char **tokens, char **env)
 {
 	pid_t child;
 	int status;
@@ -56,16 +68,15 @@ void fork_exec(char *path, char **tokens,char **env)
 	if (child == -1)
 	{
 		perror("fork failed\n");
-		exit (103);
+		exit(103);
 	}
 	if (child == 0)
 	{
-		if (execve(path, tokens, env) == -1)
-			perror("Execution failed\n");
+		execve(path, tokens, env);
+		/* perror("Execution failed\n"); */
 		// not our exit function
 	        exit(-1);
 	}
 	else
 		wait(&status);
-	return;
 }

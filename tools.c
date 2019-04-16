@@ -1,7 +1,10 @@
-/* helper functions */
 #include "simpleshell.h"
 
-/* word count */
+/**
+ * _wordCount - counts using an unsigned int on how many words there are to parse
+ * @str: string to count words in
+ * Return: returns unsigned int of number of words
+ */
 unsigned int _wordCount(char *str)
 {
 	char *delim = "\n \t :";
@@ -35,8 +38,12 @@ unsigned int _wordCount(char *str)
 	}
 	return (wrdCnt);
 }
-
-/* string compare */
+/**
+ * _strcmp - compares items in strings and returns a value if they are the same
+ * @s1: string 1
+ * @s2: string 2
+ * Return: returns 1 if the strings are null, returns 0 if succeeds.
+ */
 int _strcmp(char *s1, char *s2)
 {
 	int index = 0;
@@ -126,7 +133,7 @@ char *_strdup(char *source, unsigned int extra)
 			copy[i] = '\0';
 	}
 
-	return(copy);
+	return (copy);
 }
 
 /**
@@ -187,7 +194,7 @@ void nl_cleaner(char *str)
 	if (*str == '\0')
 		return;
 	printf("(scrubber) string: %s\n", str); // debug
-	do{
+	do {
 		i = 0;
 		nl = false;
 		max_length = _strlen(hunter);
@@ -288,11 +295,17 @@ void fly_free(char **str)
 		free(str[i]);
 	free(str);
 }
+/**
+ * updateDir - updates the directory
+ * @directory: current directory
+ * @beginning: directory to append on
+ * Return: void
+ */
 void updateDir(char *directory, char *beginning)
 {
-	extern char **environ;
 	int length, index = 0, count = 0;
 	char *printDir, **env;
+
 	env = environ;
 
 	length = _strlen(directory) + _strlen(beginning);
@@ -318,12 +331,16 @@ void updateDir(char *directory, char *beginning)
 		index++;
 	}
 }
-
+/**
+ * cpyPath - copies path from input to destination
+ * @input: path/string input
+ * Return: returns new destination and saves old PWD
+ */
 char *cpyPath(char *input)
 {
-	extern char **environ;
 	int index = 0, length = 0;
 	char *dest, **env;
+
 	env = environ;
 
 	length = _strlen(input);

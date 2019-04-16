@@ -1,5 +1,9 @@
 #include "simpleshell.h"
-
+/**
+ * _cd - changes current working directory
+ * @tokens: path to change to
+ * Return: 0 on success, perror on error.
+ */
 int _cd(char **tokens)
 {
 	int index = 0;
