@@ -239,7 +239,8 @@ char *_strcat(char *dest, char *src)
 	int i, x;
 
 	i = x = 0;
-
+	if (src == NULL)
+		return (dest);
 	while (dest[i] != '\0')
 	{
 		i++;

@@ -38,6 +38,7 @@ int search_builtins(char **args);
 /* builtins.c */
 int shell_exit(char **av);
 int _cd(char **tokens);
+int _env(void);
 
 /* tools.c */
 unsigned int _wordCount(char *str);

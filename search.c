@@ -102,10 +102,7 @@ int search_builtins(char **av)
 	if (_strcmp(global.command, cd) == 0)
 		return (_cd(av));
 	if (_strcmp(global.command, env) == 0)
-	{
-		// run env function
-		return (0);
-	}
+		return (_env());
 	if (_strcmp(global.command, setenv) == 0)
 	{
 		// run setenv function
