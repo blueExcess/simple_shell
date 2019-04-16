@@ -81,3 +81,20 @@ void fork_exec(char *path, char **tokens, char **env)
 	else
 		wait(&status);
 }
+char *com_remover(char *path)
+{
+	int index, count;
+
+	for (index = 0; path[index] != '\0'; index++)
+	{
+		count = index;
+		if (path[index] == '#')
+		{
+			if (path[--count] == ' ' || path[++count] == ' ')
+			{
+				path[index] = '\0';
+			}
+		}
+	}
+	return (path);
+}
