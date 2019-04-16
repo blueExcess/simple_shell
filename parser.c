@@ -81,6 +81,13 @@ void fork_exec(char *path, char **tokens, char **env)
 	else
 		wait(&status);
 }
+
+/**
+ * com_remover - removew all comments marked by #
+ * @path: the string from getline
+ * Return: returns string with NULL in place of #
+ */
+
 char *com_remover(char *path)
 {
 	int index, count;
