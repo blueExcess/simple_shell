@@ -26,8 +26,11 @@ int main(int ac, char *av[], char **env)
 		global.line_no++;
 		record_history(line, actual);
 		nl_remover(line);
-		if (*line == '\0') // better to do check in word count
-			continue;
+		if (*line == '\0' || actual == -1) // better to do check in word count
+			if (!flags.interactive)
+				break;
+			else
+				continue;
 		token = parser(line, del);
 		btest = search_builtins(token);
 		printf("(main) btest: %d\n", btest); // debug
@@ -78,7 +81,7 @@ void record_history(char *input, ssize_t len)
 /* set error flag? */
 	}
 
-	printf("line: %zd\n", len);
+	printf("(record_history) line: %zd\n", len); // debug
 	bytes_written = write(file_tmp, input, len);
 	if (bytes_written < 0)
 		return;
