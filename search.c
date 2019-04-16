@@ -89,7 +89,6 @@ char *path_finder(char **env)
 int search_builtins(char **av)
 {
 /* too long -- may need second builtin search function */
-	extern char **environ;
 	char **cp_env = environ;
 	char *exit = "exit", *cd = "cd", *env = "env", *setenv = "setenv";
 	char *unsetenv = "unsetenv", *help = "help", *history = "history";
