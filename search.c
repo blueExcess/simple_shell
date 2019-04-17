@@ -7,7 +7,7 @@ char *path_finder(char **env)
 	char *name = "PATH=", *path_str_ptr, *path_to_check;
 	char *path_str, *temp;
 	int i, *path_lengths, num_tokens, str_len, access_check;
-	int x = 0; //debug
+	/* int x = 0; //debug */
 
 /* find matching env variable */
 	for (i = 0; *env_copy; i++, env_copy++)
@@ -17,40 +17,19 @@ char *path_finder(char **env)
 	}
 /* set pointer to = in env and move to next value */
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
-	printf("path_str_ptr: %s\n", path_str_ptr); //debug
-
 /* copy path to new str */
 	path_str = _strdup(path_str_ptr, 0);
-	printf("path_str: %s\n", path_str); // debug
-
 /* pass path to tokenizer */
 	parsed_path = parser(path_str, ":");
-
-	/* DEBUG */
-	for (; parsed_path[x]; x++)
-		printf("parsed_path[%d]: %s\n", x, parsed_path[x]);
-
-/*	free(path_str);*/
 /* get length of every string after parsing */
 	path_lengths = _astrlen(parsed_path);
-
-	/* DEBUG */
-	for (x = 0; x <= path_lengths[0]; x++)
-		printf("path_length[%d]: %d\n", x, path_lengths[x]);
-
 /* get number of tokens in path */
 	num_tokens = path_lengths[0];
 	i = 0;
-
 /* allocate mem for new string (sub of path) and command */
 /* add '/' and command, then check if file exists. */
 /* loop will end when existence is verified or end of array */
 	do{
-		/* /\* DEBUG *\/ */
-		/* printf("global.command: %s\nglobal.command_len: %d\n", */
-		/*        global.command, global.command_length); */
-
-		/* printf("parsed_path[%d]: %s\n", i, parsed_path[i]); // debug */
 		path_to_check = parsed_path[i];
 		/* printf("path_to_check: %s, len: %zd\n", path_to_check, strlen(path_to_check)); // debug */
 		path_to_check = _strdup(parsed_path[i],
@@ -75,7 +54,7 @@ char *path_finder(char **env)
 	} while (access_check && i < num_tokens);
 /* for testing, will return to main. Actual will sent to forkExec */
 	if (i == num_tokens)
-		return (NULL); // will search builtins
+		return (NULL);
 	return (path_to_check);
 }
 
@@ -94,8 +73,8 @@ int search_builtins(char **av)
 	char *unsetenv = "unsetenv", *help = "help", *history = "history";
 	int error = 0;
 
-	// need to set any flags for running builtins?
-	printf("(search_builtins) entered function");
+	/* need to set any flags for running builtins? */
+	printf("(search_builtins) entered function\n");
 	if (_strcmp(global.command, exit) == 0)
 		return (shell_exit(av));
 	if (_strcmp(global.command, cd) == 0)
@@ -104,7 +83,7 @@ int search_builtins(char **av)
 		return (_env());
 	if (_strcmp(global.command, setenv) == 0)
 	{
-		// run setenv function
+		/* run setenv function */
 		return (0);
 	}
 	if (_strcmp(global.command, unsetenv) == 0)

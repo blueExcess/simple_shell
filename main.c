@@ -114,7 +114,6 @@ void print_prompt(void)
  * startup - run all shell startup proscesses
  * @ac: argument count
  * @av: argument list
- *
  * Return: VOID
  */
 void startup(int ac, char **av)
@@ -148,7 +147,7 @@ void startup(int ac, char **av)
 
 void sig_handler(int n)
 {
-	char *prompt = "\n($) ";
+	char *prompt = "\n$ ";
 
 	write(STDERR_FILENO, prompt, 5);
 }
