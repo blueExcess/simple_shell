@@ -13,7 +13,7 @@ run
 
 
 
-##SYNOPSIS
+## SYNOPSIS
 simple_shell [command_string | file]
 
 ## DESCRIPTION
