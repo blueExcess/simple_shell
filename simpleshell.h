@@ -32,6 +32,7 @@ void sig_handler(int n);
 char **parser(char *str, char *delim);
 void fork_exec(char *path, char **token, char **env);
 char *com_remover(char *path);
+int double_space_remover(char *path);
 
 /* search.c */
 char *path_finder(char **env);
