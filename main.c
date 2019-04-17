@@ -20,26 +20,22 @@ int main(int ac, char *av[], char **env)
 	startup(ac, av);
 
 	do {
-		/* write(2, prompt, 4); */
 		print_prompt();
 		actual = getline(&line, &len, stdin);
 		global.line_no++;
 		record_history(line, actual);
 		nl_remover(line);
-		if (*line == '\0' || actual == -1) // better to do check in word count
+		if (*line == '\0' || actual == -1)
 			if (!flags.interactive)
 				break;
 			else
 				continue;
 		token = parser(line, del);
 		btest = search_builtins(token);
-		printf("(main) btest: %d\n", btest); // debug
-		// call path_finder only if builtin returns 1 (not found)
 		if (btest == 1)
 		{
 			path = path_finder(env);
-			printf("(main) path: %s\n", path); // debug
-			fork_exec(path, token, env); // arg1 to path when fixed
+			fork_exec(path, token, env);
 		}
 		/* cleanup(line, path, token, &btest, &len); */
 		free(path);
@@ -48,7 +44,6 @@ int main(int ac, char *av[], char **env)
 		len = 0;
 		global.command = NULL;
 		free(global.command);
-		printf("(main) flags.exit: %d\n", flags.exit); // debug
 	} while (flags.exit == false);
 	return (global.exit_status);
 }
@@ -70,7 +65,6 @@ void record_history(char *input, ssize_t len)
 	char *temp = "/tmp/simple_shell_tmp_history";
 	char *path = "/home/vagrant/.simple_shell_history";
 
-/* startup - empty tmp file */
 	if (flags.startup)
 	{
 		file_tmp = open(temp, O_WRONLY | O_CREAT | O_TRUNC, 00666);
@@ -80,19 +74,14 @@ void record_history(char *input, ssize_t len)
 		file_tmp = open(temp, O_WRONLY, 00666);
 		if (file_tmp < 0)
 			return;
-/* set error flag? */
 	}
 
-	printf("(record_history) line: %zd\n", len); // debug
 	bytes_written = write(file_tmp, input, len);
 	if (bytes_written < 0)
 		return;
 	if ((size_t)bytes_written < len)
 		return;
 	written_total += bytes_written;
-/* set error flag? */
-
-/* on exit */
 	if (flags.exit == true)
 	{
 		close(file_tmp);
@@ -100,13 +89,8 @@ void record_history(char *input, ssize_t len)
 		file_perm = open(path, O_RDWR | O_CREAT | O_APPEND, 00666);
 			if (file_perm < 0)
 				return;
-		/* need read/write function to avoid massive buffer sizes */
-			printf("bytes_read = %zd\n written_total = %zd\n", bytes_read, written_total);
 		bytes_read = read(file_tmp, buffer, written_total);
-		printf("bytes_read (after  read tmp) = %zd\n", bytes_read);
-		/* append perm file size to 4096 lines */
 		perm_bw = write(file_perm, buffer, written_total);
-		printf("perm_bw = %zd\n", perm_bw);
 		close(file_tmp);
 		close(file_perm);
 	}
@@ -114,7 +98,7 @@ void record_history(char *input, ssize_t len)
 
 
 /**
- * prompt - if interactive mode, print prompt to stderr, else no prompt
+ * print_prompt - if interactive mode, print prompt to stderr, else no prompt
  *
  * Return: VOID
  */
@@ -128,6 +112,8 @@ void print_prompt(void)
 
 /**
  * startup - run all shell startup proscesses
+ * @ac: argument count
+ * @av: argument list
  *
  * Return: VOID
  */
@@ -137,21 +123,18 @@ void startup(int ac, char **av)
 	flags.startup = true;
 
 /* may end up tx startup sequences of functions here */
-
-// check if passed file to hsh
 	if (ac > 1)
 		global.input = open(av[1], O_RDONLY);
 	else
 		global.input = STDIN_FILENO;
 
-// check if interactive
 	if (isatty(STDOUT_FILENO) == 1 && isatty(global.input) == 1)
 	{
 		flags.interactive = true;
 		signal(SIGINT, &sig_handler);
 	}
 
-//set up record keeping
+/* set up record keeping */
 	record_history(NULL, 0);
 
 	/* unset startup flag */

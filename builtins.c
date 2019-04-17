@@ -82,14 +82,14 @@ int shell_exit(char **av)
 		{
 			write(2, ferror, _strlen(ferror));
 			write(2, "\n", 2);
-			// call error writing function
-			// sh: line: exit: Illegal number: status
+			/* call error writing function */
+			/* sh: line: exit: Illegal number: status */
 			return (2);
 		}
 	}
 	flags.exit = true;
 	record_history(NULL, 0);
-	// call any other functions that require cleanup
+	/* call any other functions that require cleanup */
 	close(global.input);
 	global.exit_status = value & 0377;
 	return (0);
@@ -102,7 +102,6 @@ int shell_exit(char **av)
  */
 int _env(void)
 {
-	extern char **environ;
 	char **c_env = environ;
 	int *env_len, x = 0, i = 0;
 

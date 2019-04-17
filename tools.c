@@ -1,7 +1,7 @@
 #include "simpleshell.h"
 
 /**
- * _wordCount - counts using an unsigned int on how many words there are to parse
+ * _wordCount - counts using an unsgn int on how many words there are to parse
  * @str: string to count words in
  * Return: returns unsigned int of number of words
  */
@@ -105,7 +105,7 @@ int *_astrlen(char **str)
 }
 
 /**
- * _strcpy - copy a string from source to location
+ * _strdup - copy a string from source to location
  * @source: string to copy
  * @extra: how many extra bytes to include after end of string
  *
@@ -188,12 +188,10 @@ void nl_cleaner(char *str)
 	int max_length, i;
 	bool nl;
 
-	printf("entered scrubber\n"); // debug
 	if (str == NULL)
 		return;
 	if (*str == '\0')
 		return;
-	printf("(scrubber) string: %s\n", str); // debug
 	do {
 		i = 0;
 		nl = false;
@@ -208,10 +206,8 @@ void nl_cleaner(char *str)
 				*hunter = *mover;
 				printf("i: %d\n", i);
 			}
-			printf("ml: %d, i: %d\n", max_length, i); // debug
 		}
 	} while (nl == true);
-	printf("(post scrubber) string: %s\n", str); // debug
 }
 
 /**
