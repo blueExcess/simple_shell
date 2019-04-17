@@ -11,7 +11,7 @@
 char **parser(char *string, char *delim)
 {
 	unsigned int wrdCnt, index;
-	char **tokened, *token, *command, **envc, *comment;
+	char **tokened, *token, **envc;
 
 	string = com_remover(string);
 	envc = environ;
