@@ -15,8 +15,6 @@ char *path_finder(char **env)
 	char *path_str;
 	int i, *path_lengths, num_tokens, str_len, access_check;
 	bool flag = false;
-	/* int x = 0; //debug */
-
 
 	for (i = 0; *env_copy; i++, env_copy++)
 	{
