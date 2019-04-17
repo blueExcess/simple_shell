@@ -1,7 +1,12 @@
 /* error handling functions */
 #include "simpleshell.h"
 
-void basic_error(void)
+/**
+ * basic_err - prints out argv[0] and line no
+ *
+ * Return: VOID
+ */
+void basic_err(void)
 {
 	char *line;
 
@@ -13,9 +18,14 @@ void basic_error(void)
 	write(STDERR_FILENO, line, _strlen(line));
 }
 
+/**
+ * std_err - calls perror
+ *
+ * Return: VOID
+ */
 void std_err(void)
 {
-	basic_error();
+	basic_err();
 	perror(global.command);
 	global.exit_status = errno;
 	if (errno == EACCES)
@@ -49,7 +59,7 @@ void namesave(char **av)
 char *_itoa(int x)
 {
 	char str[10] = {'\0'};
-	char *end, *beg = str;
+	char *end, *beg = str, *temp, *ret;
 	int i = 0;
 
 	if (x == 0)
@@ -71,5 +81,6 @@ char *_itoa(int x)
 	end = _strchr(str, '\0');
 	*end = ':';
 	*(end + 1) = ' ';
-	return (str);
+	ret = str;
+	return (ret);
 }

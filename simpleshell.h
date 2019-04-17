@@ -62,7 +62,8 @@ char *cpyPath(char *input);
 void updateDir(char *directory, char *beginning);
 
 /* error.c */
-int basic_error(void);
+void basic_err(void);
+void std_err(void);
 void namesave(char **av);
 char *_itoa(int x);
 

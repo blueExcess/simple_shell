@@ -80,10 +80,9 @@ int shell_exit(char **av)
 			value = _atoi(status);
 		if (value < 0 || value > INT_MAX || err)
 		{
+			basic_err();
 			write(2, ferror, _strlen(ferror));
 			write(2, "\n", 2);
-			/* call error writing function */
-			/* sh: line: exit: Illegal number: status */
 			return (2);
 		}
 	}

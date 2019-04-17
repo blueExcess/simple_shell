@@ -1,4 +1,4 @@
-./* super basic shell - starting point we can build off (using std functions) */
+/* super basic shell - starting point we can build off (using std functions) */
 #include "simpleshell.h"
 
 /**
@@ -16,7 +16,7 @@ int main(int ac, char *av[], char **env)
 	ssize_t actual;
 	/* pid_t parent_pid; */
 	int btest;
-	
+
 	startup(ac, av);
 
 	do {
