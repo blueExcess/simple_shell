@@ -31,6 +31,7 @@ void sig_handler(int n);
 /* parser.c */
 char **parser(char *str, char *delim);
 void fork_exec(char *path, char **token, char **env);
+char *com_remover(char *path);
 
 /* search.c */
 char *path_finder(char **env);
@@ -57,7 +58,6 @@ long int _atoi(char *str);
 void fly_free(char **str);
 char *cpyPath(char *input);
 void updateDir(char *directory, char *beginning);
-
 
 
 /* GLOBALS */
