@@ -14,9 +14,8 @@ int main(int ac, char *av[], char **env)
 	char *line = NULL, **token, *del = " ", *path;
 	size_t len = 0;
 	ssize_t actual;
-	/* pid_t parent_pid; */
 	int btest;
-	
+
 	startup(ac, av);
 
 	do {
@@ -29,8 +28,7 @@ int main(int ac, char *av[], char **env)
 		{
 			if (!flags.interactive)
 				break;
-			else
-				continue;
+			continue;
 		}
 		token = parser(line, del);
 		btest = search_builtins(token);
@@ -39,7 +37,6 @@ int main(int ac, char *av[], char **env)
 			path = path_finder(env);
 			fork_exec(path, token, env);
 		}
-		/* cleanup(line, path, token, &btest, &len); */
 		free(path);
 		free(line);
 		line = NULL;
@@ -89,10 +86,10 @@ void record_history(char *input, ssize_t len)
 		close(file_tmp);
 		file_tmp = open(temp, O_RDONLY);
 		file_perm = open(path, O_RDWR | O_CREAT | O_APPEND, 00666);
-			if (file_perm < 0)
-				return;
-			/*bytes_read =*/ read(file_tmp, buffer, written_total);
-		/*perm_bw =*/ write(file_perm, buffer, written_total);
+		if (file_perm < 0)
+			return;
+		read(file_tmp, buffer, written_total);
+		write(file_perm, buffer, written_total);
 		close(file_tmp);
 		close(file_perm);
 	}
@@ -106,7 +103,7 @@ void record_history(char *input, ssize_t len)
  */
 void print_prompt(void)
 {
-	static char *prompt = "\n$ ";
+	static char *prompt = "$ ";
 
 	if (flags.interactive == true)
 		write(STDERR_FILENO, prompt, 3);
