@@ -5,7 +5,7 @@ char *path_finder(char **env)
 {
 	char **env_copy = env, **parsed_path;
 	char *name = "PATH=", *path_str_ptr, *path_to_check;
-	char *path_str, *temp;
+	char *path_str;
 	int i, *path_lengths, num_tokens, str_len, access_check;
 	/* int x = 0; //debug */
 
@@ -68,13 +68,11 @@ char *path_finder(char **env)
 int search_builtins(char **av)
 {
 /* too long -- may need second builtin search function */
-	char **cp_env = environ;
 	char *exit = "exit", *cd = "cd", *env = "env", *setenv = "setenv";
 	char *unsetenv = "unsetenv", *help = "help", *history = "history";
 	int error = 0;
 
 	/* need to set any flags for running builtins? */
-	printf("(search_builtins) entered function\n");
 	if (_strcmp(global.command, exit) == 0)
 		return (shell_exit(av));
 	if (_strcmp(global.command, cd) == 0)

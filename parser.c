@@ -32,25 +32,22 @@ char **parser(char *string, char *delim)
 	}
 	if (tokened[0][0] != '/')
 	{
-		/* command = malloc(sizeof(char) * _strlen(tokened[0]) + 1); // NP */
-		/* /\* NOT FREED *\/ */
-		/* if (command == NULL) */
-		/* 	return (NULL); // set error flag? */
 		global.command = _strdup(tokened[0], 0);
-		/* global.command = command; */
 		global.command_length = _strlen(global.command);
 	}
 	else if (*tokened[0] == '/')
 		if ((access(tokened[0], F_OK)) == 0)
 			fork_exec(tokened[0], tokened, envc);
+	free(token);
 	return (tokened);
 }
 
 
 /**
- * fork_exec - creates a child process and executes the written command if it's external
+ * fork_exec - creates a child process and executes the
+ * written command if it's external
  * @path: path to check process with
- * @token: arguments from command line
+ * @tokens: arguments from command line
  * @env: enviroment
  * Return: void
  */
@@ -73,10 +70,10 @@ void fork_exec(char *path, char **tokens, char **env)
 	}
 	if (child == 0)
 	{
-		execve(path, tokens, env);
-		/* perror("Execution failed\n"); */
-		// not our exit function
-	        exit(-1);
+		if (execve(path, tokens, env) == 0)
+			perror("Execution failed\n");
+		/* not our exit function */
+		exit(-1);
 	}
 	else
 		wait(&status);
