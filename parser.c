@@ -35,6 +35,11 @@ char **parser(char *string, char *delim)
 		global.command = _strdup(tokened[0], 0);
 		global.command_length = _strlen(global.command);
 	}
+	else if (tokened[0][0] == '/')
+	{
+		if (!(access(tokened[0], F_OK)))
+			fork_exec(tokened[0], tokened, envc);
+	}
 	free(token);
 	return (tokened);
 }
@@ -56,15 +61,15 @@ void fork_exec(char *path, char **tokens, char **env)
 	if (!path)
 	{
 		basic_err();
-		perror("command not found\n");
+		perror(global.command);
 		return;
 	}
-/*switch runs one of the two cases, then runs the default after*/
+
 	child = fork();
 	if (child == -1)
 	{
 		basic_err();
-		perror("fork failed\n");
+		perror(global.command);
 		exit(103);
 	}
 	if (child == 0)
@@ -72,7 +77,7 @@ void fork_exec(char *path, char **tokens, char **env)
 		if (execve(path, tokens, env) == 0)
 		{
 			basic_err();
-			perror("Execution failed\n");
+			perror(global.command);
 		}
 		exit(-1);
 	}
