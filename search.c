@@ -14,6 +14,7 @@ char *path_finder(char **env)
 	char *name = "PATH=", *path_str_ptr, *path_to_check;
 	char *path_str;
 	int i, *path_lengths, num_tokens, str_len, access_check;
+	bool flag = false;
 	/* int x = 0; //debug */
 
 
@@ -24,6 +25,9 @@ char *path_finder(char **env)
 	}
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;
 	path_str = _strdup(path_str_ptr, 0);
+	for (i = 0; path_str[i]; i++)
+		if (path_str[i] == ':' && path_str[i + 1] == ':')
+			flag = true;
 	parsed_path = parser(path_str, ":");
 	path_lengths = _astrlen(parsed_path);
 	num_tokens = path_lengths[0];
@@ -42,6 +46,9 @@ char *path_finder(char **env)
 		}
 		i++;
 	} while (access_check && i < num_tokens);
+	if (flag)
+		if (access(global.command, F_OK) == 0)
+			return(global.command);
 	if (i == num_tokens)
 		return (NULL);
 	return (path_to_check);
