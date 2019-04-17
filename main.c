@@ -11,12 +11,12 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line = NULL, *exit = "exit\n", **token, *del = " ", *path;
+	char *line = NULL, **token, *del = " ", *path;
 	size_t len = 0;
 	ssize_t actual;
-	pid_t parent_pid;
+	/* pid_t parent_pid; */
 	int btest;
-
+	
 	startup(ac, av);
 
 	do {
@@ -26,10 +26,12 @@ int main(int ac, char *av[], char **env)
 		record_history(line, actual);
 		nl_remover(line);
 		if (*line == '\0' || actual == -1)
+		{
 			if (!flags.interactive)
 				break;
 			else
 				continue;
+		}
 		token = parser(line, del);
 		btest = search_builtins(token);
 		if (btest == 1)
@@ -60,7 +62,7 @@ void record_history(char *input, ssize_t len)
 	static int file_tmp;
 	int file_perm;
 	static size_t written_total;
-	ssize_t bytes_written, bytes_read, perm_br, perm_bw;
+	ssize_t bytes_written;
 	char buffer[524288];
 	char *temp = "/tmp/simple_shell_tmp_history";
 	char *path = "/home/vagrant/.simple_shell_history";
@@ -79,7 +81,7 @@ void record_history(char *input, ssize_t len)
 	bytes_written = write(file_tmp, input, len);
 	if (bytes_written < 0)
 		return;
-	if ((size_t)bytes_written < len)
+	if ((ssize_t)bytes_written < len)
 		return;
 	written_total += bytes_written;
 	if (flags.exit == true)
@@ -89,8 +91,8 @@ void record_history(char *input, ssize_t len)
 		file_perm = open(path, O_RDWR | O_CREAT | O_APPEND, 00666);
 			if (file_perm < 0)
 				return;
-		bytes_read = read(file_tmp, buffer, written_total);
-		perm_bw = write(file_perm, buffer, written_total);
+			/*bytes_read =*/ read(file_tmp, buffer, written_total);
+		/*perm_bw =*/ write(file_perm, buffer, written_total);
 		close(file_tmp);
 		close(file_perm);
 	}
@@ -104,10 +106,10 @@ void record_history(char *input, ssize_t len)
  */
 void print_prompt(void)
 {
-	static char *prompt = "($) ";
+	static char *prompt = "\n$ ";
 
 	if (flags.interactive == true)
-		write(STDERR_FILENO, prompt, 4);
+		write(STDERR_FILENO, prompt, 3);
 }
 
 /**
@@ -145,7 +147,7 @@ void startup(int ac, char **av)
  * @n: is the actual command coming in from the OS signal
  */
 
-void sig_handler(int n)
+void sig_handler(int n __attribute__((unused)))
 {
 	char *prompt = "\n$ ";
 

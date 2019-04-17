@@ -48,7 +48,7 @@ int _cd(char **tokens)
 }
 
 /**
- * exit - will exit the shell and close everything down
+ * shell_exit - will exit the shell and close everything down
  * @av: argv to collect exit status
  *
  * Return: 0 on success, -1 on error
@@ -103,7 +103,7 @@ int shell_exit(char **av)
 int _env(void)
 {
 	char **c_env = environ;
-	int *env_len, x = 0, i = 0;
+	int *env_len, i = 0;
 
 	env_len = _astrlen(c_env);
 	for (; c_env[i]; i++)
