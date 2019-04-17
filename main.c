@@ -11,7 +11,7 @@
  */
 int main(int ac, char *av[], char **env)
 {
-	char *line = NULL, **token, *del = " ", *path;
+	char *line = NULL, **token, *del = " ", *path = NULL;
 	size_t len = 0;
 	ssize_t actual;
 	int btest;
@@ -24,12 +24,16 @@ int main(int ac, char *av[], char **env)
 		global.line_no++;
 		record_history(line, actual);
 		nl_remover(line);
-		if (*line == '\0' || actual == -1)
+		if (actual == -1)
 		{
-			if (!flags.interactive)
-				break;
-			continue;
+			if (flags.interactive)
+				write(STDERR_FILENO, "\n", 1);
+			break;
 		}
+		if (*line == '\0')
+			continue;
+		if (double_space_remover(line) == 0)
+			continue;
 		token = parser(line, del);
 		btest = search_builtins(token);
 		if (btest == 1)
