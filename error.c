@@ -16,6 +16,7 @@ void basic_err(void)
 	printf("az: %s\n", global.az); // debug
 	write(STDERR_FILENO, global.az, _strlen(global.az));
 	write(STDERR_FILENO, line, _strlen(line));
+
 }
 
 /**
@@ -58,7 +59,7 @@ void namesave(char **av)
 
 char *_itoa(int x)
 {
-	char str[10] = {'\0'};
+	static char str[10] = {'\0'};
 	char *end, *beg = str, *temp, *ret;
 	int i = 0;
 

@@ -89,6 +89,7 @@ int shell_exit(char **av)
 	flags.exit = true;
 	record_history(NULL, 0);
 	/* call any other functions that require cleanup */
+	free(global.az);
 	close(global.input);
 	global.exit_status = value & 0377;
 	return (0);
