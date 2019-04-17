@@ -49,15 +49,22 @@ int _strcmp(char *s1, char *s2);
 int _strlen(char *str);
 int *_astrlen(char **str);
 char *_strdup(char *source, unsigned int extra);
+/* tools2.c */
 void _strtostr(char *source, char *dest);
 char *_strchr(char *str, int c);
 void nl_cleaner(char *str);
 void nl_remover(char *str);
 char *_strcat(char *dest, char *src);
+/* tools3.c */
 long int _atoi(char *str);
 void fly_free(char **str);
 char *cpyPath(char *input);
 void updateDir(char *directory, char *beginning);
+
+/* error.c */
+int basic_error(void);
+void namesave(char **av);
+char *_itoa(int x);
 
 
 /* GLOBALS */
@@ -79,6 +86,11 @@ struct flags
 /**
  * global - global variables (not bool flags)
  * @command: name of command that's been parsed
+ * @command_length: length of command string
+ * @line_no: line no.
+ * @exit_status: number to exit with (error number)
+ * @input: input number (file open)
+ * @az: name of shell (argv[0])
  */
 struct global
 {
@@ -87,6 +99,7 @@ struct global
 	int line_no;
 	int exit_status;
 	int input;
+	char *az;
 
 }global;
 

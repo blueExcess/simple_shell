@@ -1,4 +1,4 @@
-/* super basic shell - starting point we can build off (using std functions) */
+./* super basic shell - starting point we can build off (using std functions) */
 #include "simpleshell.h"
 
 /**
