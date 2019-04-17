@@ -1,4 +1,4 @@
-#include "basicshell.h"
+#include "simpleshell.h"
 
 /**
  * _strtostr - copy a string from source to destination
@@ -7,7 +7,7 @@
  *
  * Return: VOID
  */
-6void _strtostr(char *source, char *dest)
+void _strtostr(char *source, char *dest)
 {
 	int i;
 
@@ -24,7 +24,7 @@
  *
  * Return: pointer on success, NULL on failure. \0 is valid/included.
  */
-7char *_strchr(char *str, int c)
+char *_strchr(char *str, int c)
 {
 /* NOTE: if '\0' is specified, will return pointer to NULL char at */
 /* end of string (s + strlen(s)) */
@@ -46,10 +46,10 @@
  *
  * Return: VOID
  */
-8void nl_cleaner(char *str)
+void nl_cleaner(char *str)
 {
 	char *hunter = str, *mover = str;
-	int max_length, i;
+	int i;
 	bool nl;
 
 	if (str == NULL)
@@ -59,7 +59,6 @@
 	do {
 		i = 0;
 		nl = false;
-		max_length = _strlen(hunter);
 		hunter = str;
 		for (; *hunter != '\n' && *mover; hunter++, i++)
 		{
@@ -80,7 +79,7 @@
  *
  * Return: VOID
  */
-9void nl_remover(char *str)
+void nl_remover(char *str)
 {
 	char *finder, *dest;
 	char remove = '\n';
@@ -101,7 +100,7 @@
  *
  * Return: pointer to dest string
  */
-10char *_strcat(char *dest, char *src)
+char *_strcat(char *dest, char *src)
 {
 	int i, x;
 

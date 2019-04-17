@@ -5,7 +5,7 @@
  * @str: string to count words in
  * Return: returns unsigned int of number of words
  */
-1unsigned int _wordCount(char *str)
+unsigned int _wordCount(char *str)
 {
 	char *delim = "\n \t :";
 	unsigned int wrdCnt, index, flag;
@@ -44,7 +44,7 @@
  * @s2: string 2
  * Return: returns 1 if the strings are null, returns 0 if succeeds.
  */
-2int _strcmp(char *s1, char *s2)
+int _strcmp(char *s1, char *s2)
 {
 	int index = 0;
 
@@ -67,7 +67,7 @@
  *
  * Return: length of string, -1 on fail
  */
-3int _strlen(char *str)
+int _strlen(char *str)
 {
 	int count = 0;
 
@@ -83,7 +83,7 @@
  *
  * Return: an array of lengths of strings, arr[0] = len of new array;
  */
-4int *_astrlen(char **str)
+int *_astrlen(char **str)
 {
 	static int arr[1024];
 	int i, j, x;
@@ -111,10 +111,10 @@
  *
  * Return: pointer to begining of null-term string.
  */
-5char *_strdup(char *source, unsigned int extra)
+char *_strdup(char *source, unsigned int extra)
 {
 	char *copy;
-	int i;
+	unsigned int i;
 
 	if (source == NULL)
 		return (NULL);

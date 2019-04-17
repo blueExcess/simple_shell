@@ -1,4 +1,4 @@
-#include "basicshell.h"
+#include "simpleshell.h"
 
 /**
  * _atoi - convert letters to numbers
@@ -6,7 +6,7 @@
  *
  * Return: int
  */
-11long int _atoi(char *str)
+long int _atoi(char *str)
 {
 	int i = 0, num = 0;
 
@@ -25,7 +25,7 @@
  *
  * Return: VOID
  */
-12void fly_free(char **str)
+void fly_free(char **str)
 {
 	int i = 0;
 
@@ -41,7 +41,7 @@
  * @beginning: directory to append on
  * Return: void
  */
-13void updateDir(char *directory, char *beginning)
+void updateDir(char *directory, char *beginning)
 {
 	int length, index = 0, count = 0;
 	char *printDir, **env;
@@ -76,7 +76,7 @@
  * @input: path/string input
  * Return: returns new destination and saves old PWD
  */
-14char *cpyPath(char *input)
+char *cpyPath(char *input)
 {
 	int index = 0, length = 0;
 	char *dest, **env;
