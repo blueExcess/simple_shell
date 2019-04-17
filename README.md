@@ -7,11 +7,11 @@ A simple shell made for a Holberton Project.
 To start up this simple_shell, compile using 'gcc -Wall -Werror -Wextra -pedantic *.c -o simple_shell'.
 
 run
-'''
-{
-./simple_shell
-}
-'''
+
+
+	./simple_shell
+
+
 
 ##SYNOPSIS
 simple_shell [command_string | file]
