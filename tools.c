@@ -5,7 +5,7 @@
  * @str: string to count words in
  * Return: returns unsigned int of number of words
  */
-unsigned int _wordCount(char *str)
+1unsigned int _wordCount(char *str)
 {
 	char *delim = "\n \t :";
 	unsigned int wrdCnt, index, flag;
@@ -44,7 +44,7 @@ unsigned int _wordCount(char *str)
  * @s2: string 2
  * Return: returns 1 if the strings are null, returns 0 if succeeds.
  */
-int _strcmp(char *s1, char *s2)
+2int _strcmp(char *s1, char *s2)
 {
 	int index = 0;
 
@@ -67,7 +67,7 @@ int _strcmp(char *s1, char *s2)
  *
  * Return: length of string, -1 on fail
  */
-int _strlen(char *str)
+3int _strlen(char *str)
 {
 	int count = 0;
 
@@ -83,7 +83,7 @@ int _strlen(char *str)
  *
  * Return: an array of lengths of strings, arr[0] = len of new array;
  */
-int *_astrlen(char **str)
+4int *_astrlen(char **str)
 {
 	static int arr[1024];
 	int i, j, x;
@@ -111,7 +111,7 @@ int *_astrlen(char **str)
  *
  * Return: pointer to begining of null-term string.
  */
-char *_strdup(char *source, unsigned int extra)
+5char *_strdup(char *source, unsigned int extra)
 {
 	char *copy;
 	int i;
@@ -134,222 +134,4 @@ char *_strdup(char *source, unsigned int extra)
 	}
 
 	return (copy);
-}
-
-/**
- * _strtostr - copy a string from source to destination
- * @source: string to copy
- * @dest: where to copy to
- *
- * Return: VOID
- */
-void _strtostr(char *source, char *dest)
-{
-	int i;
-
-	if (source == NULL || dest == NULL)
-		return;
-	for (i = 0; source[i]; i++)
-		dest[i] = source[i];
-}
-
-/**
- * _strchr - sets pointer to first occurrence of of c in str
- * @str: string to check
- * @c: character
- *
- * Return: pointer on success, NULL on failure. \0 is valid/included.
- */
-char *_strchr(char *str, int c)
-{
-/* NOTE: if '\0' is specified, will return pointer to NULL char at */
-/* end of string (s + strlen(s)) */
-	char *ptr = str;
-
-	if (str == NULL)
-		return (NULL);
-	if (c == 0)
-		return (ptr + _strlen(ptr));
-	for (; *ptr; ptr++)
-		if (*ptr == c)
-			return (ptr);
-	return (NULL);
-}
-
-/**
- * nl_cleaner - removes all nl from string
- * @str: string to clean
- *
- * Return: VOID
- */
-void nl_cleaner(char *str)
-{
-	char *hunter = str, *mover = str;
-	int max_length, i;
-	bool nl;
-
-	if (str == NULL)
-		return;
-	if (*str == '\0')
-		return;
-	do {
-		i = 0;
-		nl = false;
-		max_length = _strlen(hunter);
-		hunter = str;
-		for (; *hunter != '\n' && *mover; hunter++, i++)
-		{
-			nl = true;
-			mover = hunter + 1;
-			for (; *mover; i++, hunter++, mover++)
-			{
-				*hunter = *mover;
-				printf("i: %d\n", i);
-			}
-		}
-	} while (nl == true);
-}
-
-/**
- * nl_remover - remove newlines from string
- * @str: string to clense
- *
- * Return: VOID
- */
-void nl_remover(char *str)
-{
-	char *finder, *dest;
-	char remove = '\n';
-
-	for (finder = dest = str; *finder != '\0'; finder++)
-	{
-		*dest = *finder;
-		if (*dest != remove)
-			dest++;
-	}
-	*dest = '\0';
-}
-
-/**
- * _strcat - concatonate two strings
- * @dest: destination for concatination
- * @src: string to add
- *
- * Return: pointer to dest string
- */
-char *_strcat(char *dest, char *src)
-{
-	int i, x;
-
-	i = x = 0;
-	if (src == NULL)
-		return (dest);
-	while (dest[i] != '\0')
-	{
-		i++;
-	}
-	while (src[x] != '\0')
-	{
-		dest[i++] = src[x++];
-	}
-	dest[i] = '\0';
-	return (dest);
-}
-
-/**
- * _atoi - convert letters to numbers
- * @str: string to convert to numbers
- *
- * Return: int
- */
-long int _atoi(char *str)
-{
-	int i = 0, num = 0;
-
-	if (str[0] == '+')
-		i++;
-	for (; str[i]; i++)
-		if (str[i] >= '0' || str[i] <= '9')
-			num = num * 10 + (str[i] - '0');
-
-	return (num);
-}
-
-/**
- * fly_free - free arrays of pointers to strings
- * @str: thing to set free
- *
- * Return: VOID
- */
-void fly_free(char **str)
-{
-	int i = 0;
-
-	if (str == NULL || *str == NULL)
-		return;
-	for (; str[i]; i++)
-		free(str[i]);
-	free(str);
-}
-/**
- * updateDir - updates the directory
- * @directory: current directory
- * @beginning: directory to append on
- * Return: void
- */
-void updateDir(char *directory, char *beginning)
-{
-	int length, index = 0, count = 0;
-	char *printDir, **env;
-
-	env = environ;
-
-	length = _strlen(directory) + _strlen(beginning);
-	printDir = malloc(sizeof(char) * length);
-
-	for (index = 0; index < length; index++)
-	{
-		if (index < _strlen(beginning))
-			printDir[index] = beginning[index];
-		else
-			printDir[index] = beginning[count++];
-	}
-	printDir[index] = '\0';
-	index = 0;
-	length = _strlen(beginning);
-	while (env[index])
-	{
-		if (strncmp(beginning, env[index++], length) == 0)
-		{
-			env[index] = printDir;
-			break;
-		}
-		index++;
-	}
-}
-/**
- * cpyPath - copies path from input to destination
- * @input: path/string input
- * Return: returns new destination and saves old PWD
- */
-char *cpyPath(char *input)
-{
-	int index = 0, length = 0;
-	char *dest, **env;
-
-	env = environ;
-
-	length = _strlen(input);
-	while (env[index])
-	{
-		if (_strcmp(input, env[index]) == 0)
-		{
-			dest = env[index];
-			break;
-		}
-		index++;
-	}
-	dest = dest + length;
-
-	return (dest);
 }
