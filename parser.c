@@ -35,9 +35,6 @@ char **parser(char *string, char *delim)
 		global.command = _strdup(tokened[0], 0);
 		global.command_length = _strlen(global.command);
 	}
-	else if (*tokened[0] == '/')
-		if ((access(tokened[0], F_OK)) == 0)
-			fork_exec(tokened[0], tokened, envc);
 	free(token);
 	return (tokened);
 }
@@ -58,6 +55,7 @@ void fork_exec(char *path, char **tokens, char **env)
 
 	if (!path)
 	{
+		basic_err();
 		perror("command not found\n");
 		return;
 	}
@@ -65,18 +63,24 @@ void fork_exec(char *path, char **tokens, char **env)
 	child = fork();
 	if (child == -1)
 	{
+		basic_err();
 		perror("fork failed\n");
 		exit(103);
 	}
 	if (child == 0)
 	{
 		if (execve(path, tokens, env) == 0)
+		{
+			basic_err();
 			perror("Execution failed\n");
-		/* not our exit function */
+		}
 		exit(-1);
 	}
 	else
+	{
 		wait(&status);
+		global.exit_status = WEXITSTATUS(global.exit_status);
+	}
 }
 
 /**

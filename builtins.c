@@ -18,7 +18,8 @@ int _cd(char **tokens)
 		getcwd(buffer, sizeof(tokens));
 		updateDir(buffer, "OLDPWD=");
 		if (chdir(newPath) != 0)
-			perror("");
+			basic_err();
+			perror(global.command);
 		getcwd(buffer, sizeof(buffer));
 		updateDir(buffer, "PWD=");
 	}
@@ -30,6 +31,7 @@ int _cd(char **tokens)
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "OLDPWD=");
 			if (chdir(newPath) != 0)
+				basic_err();
 				perror("");
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "PWD=");
@@ -39,7 +41,8 @@ int _cd(char **tokens)
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "OLDPWD=");
 			if (chdir(tokens[1]))
-				perror("");
+				basic_err();
+				perror(global.command);
 			getcwd(buffer, sizeof(buffer));
 			updateDir(buffer, "PWD=");
 		}
