@@ -46,9 +46,9 @@ char *path_finder(char **env)
 /* add '/' and command, then check if file exists. */
 /* loop will end when existence is verified or end of array */
 	do{
-		/* DEBUG */
-		printf("global.command: %s\nglobal.command_len: %d\n",
-		       global.command, global.command_length);
+		/* /\* DEBUG *\/ */
+		/* printf("global.command: %s\nglobal.command_len: %d\n", */
+		/*        global.command, global.command_length); */
 
 		/* printf("parsed_path[%d]: %s\n", i, parsed_path[i]); // debug */
 		path_to_check = parsed_path[i];

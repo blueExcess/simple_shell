@@ -41,13 +41,13 @@ int main(int ac, char *av[], char **env)
 			printf("(main) path: %s\n", path); // debug
 			fork_exec(path, token, env); // arg1 to path when fixed
 		}
-		free(path); // need function to free all **x
-
-		/*free(line); */
+		/* cleanup(line, path, token, &btest, &len); */
+		free(path);
+		free(line);
 		line = NULL;
 		len = 0;
-		free(global.command);
 		global.command = NULL;
+		free(global.command);
 		printf("(main) flags.exit: %d\n", flags.exit); // debug
 	} while (flags.exit == false);
 	return (global.exit_status);

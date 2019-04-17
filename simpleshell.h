@@ -16,6 +16,7 @@
 #include <stdarg.h>
 #include <limits.h>
 #include <errno.h>
+#include <stddef.h>
 
 
 /* PROTOTYPES */
@@ -34,6 +35,7 @@ void fork_exec(char *path, char **token, char **env);
 /* search.c */
 char *path_finder(char **env);
 int search_builtins(char **args);
+void cleanup(char *line, char *path, char **token, int *btest, size_t *len);
 
 /* builtins.c */
 int shell_exit(char **av);
