@@ -47,6 +47,7 @@ int main(int ac, char *av[], char **env)
 		line = NULL;
 		len = 0;
 		global.command = NULL;
+		free(token);
 		free(global.command);
 	} while (flags.exit == false);
 	return (global.exit_status);
