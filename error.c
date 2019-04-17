@@ -12,10 +12,15 @@ void basic_err(void)
 
 
 	line = _itoa(global.line_no);
-	printf("line: %s\n", line); // debug
-	printf("az: %s\n", global.az); // debug
 	write(STDERR_FILENO, global.az, _strlen(global.az));
 	write(STDERR_FILENO, line, _strlen(line));
+	global.exit_status = errno;
+	if (errno == EACCES)
+		global.exit_status = 126;
+	else if (errno == ENOENT)
+		global.exit_status = 127;
+	else
+		global.exit_status = 2;
 
 }
 

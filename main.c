@@ -18,7 +18,6 @@ int main(int ac, char *av[], char **env)
 
 	startup(ac, av);
 	namesave(av);
-
 	do {
 		print_prompt();
 		actual = getline(&line, &len, stdin);
@@ -46,9 +45,9 @@ int main(int ac, char *av[], char **env)
 		free(line);
 		line = NULL;
 		len = 0;
-		global.command = NULL;
 		free(token);
 		free(global.command);
+		global.command = NULL;
 	} while (flags.exit == false);
 	return (global.exit_status);
 }

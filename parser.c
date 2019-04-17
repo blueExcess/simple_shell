@@ -73,6 +73,8 @@ void fork_exec(char *path, char **tokens, char **env)
 		{
 			basic_err();
 			perror("Execution failed\n");
+			free(path);
+			free(tokens);
 		}
 		exit(-1);
 	}
@@ -111,7 +113,7 @@ char *com_remover(char *path)
 int double_space_remover(char *path)
 {
 	int index;
-        int count = 0;
+	int count = 0;
 	for (index = 0; path[index] != '\0'; index++)
 	{
 		if (path[index] == ' ')

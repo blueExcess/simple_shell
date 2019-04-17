@@ -48,7 +48,7 @@ char *path_finder(char **env)
 	} while (access_check && i < num_tokens);
 	if (flag)
 		if (access(global.command, F_OK) == 0)
-			return(global.command);
+			return (global.command);
 	if (i == num_tokens)
 		return (NULL);
 	return (path_to_check);
