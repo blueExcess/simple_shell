@@ -17,6 +17,7 @@ int main(int ac, char *av[], char **env)
 	int btest;
 
 	startup(ac, av);
+	namesave(av);
 
 	do {
 		print_prompt();
