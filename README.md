@@ -8,8 +8,9 @@ To start up this simple_shell, compile using 'gcc -Wall -Werror -Wextra -pedanti
 
 run
 '''
+{
 ./simple_shell
-
+}
 '''
 
 ##SYNOPSIS
