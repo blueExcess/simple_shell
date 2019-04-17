@@ -103,3 +103,19 @@ char *com_remover(char *path)
 	}
 	return (path);
 }
+
+int double_space_remover(char *path)
+{
+	int index;
+        int count = 0;
+	for (index = 0; path[index] != '\0'; index++)
+	{
+		if (path[index] == ' ')
+		{
+			count++;
+			if (count  == _strlen(path))
+				return (0);
+		}
+	}
+	return (1);
+}
