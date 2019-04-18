@@ -74,7 +74,7 @@ char *_itoa(int x)
 	beg = str;
 	i = 0;
 	if (x == 0)
-		str[0] == '0';
+		str[0] = '0';
 	while (x)
 	{
 		str[i++] = (x % 10) + '0';
