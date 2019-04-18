@@ -62,6 +62,12 @@ void namesave(char **av)
 	global.az[x + 2] = '\0';
 }
 
+/**
+ * _itoa - change int to string
+ * @x: number to convert
+ *
+ * Return: converted string
+ */
 char *_itoa(int x)
 {
 	static char str[14] = {'\0'};
