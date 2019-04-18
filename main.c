@@ -41,7 +41,6 @@ int main(int ac, char *av[], char **env)
 			path = path_finder(env);
 			fork_exec(path, token, env);
 		}
-		free(path);
 		free(line);
 		line = NULL;
 		len = 0;

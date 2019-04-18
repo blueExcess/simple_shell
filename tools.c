@@ -46,19 +46,17 @@ unsigned int _wordCount(char *str)
  */
 int _strcmp(char *s1, char *s2)
 {
+/* s1 == comp, s2 == to match to */
 	int index = 0;
 
 	if (s1 == NULL || s2 == NULL)
 		return (1);
-	while (s1[index] != '\0' && s2[index] != '\0')
-	{
-		if (s1[index] != s2[index])
-		{
-			return ((s1[index] - '0') - (s2[index] - '0'));
-		}
+	while (s2[index] && (s1[index] == s2[index]))
 		index++;
-	}
-	return (0);
+
+	if (s2[index] == '\0')
+		return (0);
+	return (1);
 }
 
 /**

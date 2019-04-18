@@ -64,10 +64,15 @@ void namesave(char **av)
 
 char *_itoa(int x)
 {
-	static char str[15] = {'\0'};
+	static char str[14] = {'\0'};
 	char *end, *beg = str, *temp, *ret;
 	int i = 0;
 
+	for (i = 0; i < 14; i++)
+		str[i] = '\0';
+	end = str;
+	beg = str;
+	i = 0;
 	if (x == 0)
 		str[0] == '0';
 	while (x)
@@ -85,11 +90,9 @@ char *_itoa(int x)
 		beg++, end--;
 	}
 	end = _strchr(str, '\0');
-	i = _strlen(str);
-	for (; i < 15; i++)
-		str[i] = '\0';
-	*end = ':';
-	*(end + 1) = ' ';
+	str[i] = ':';
+	str[i + 1] = ' ';
+	str[i + 2] = '\0';
 	ret = str;
 	return (ret);
 }
