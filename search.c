@@ -18,7 +18,7 @@ char *path_finder(char **env)
 
 	for (i = 0; *env_copy; i++, env_copy++)
 	{
-		if (strncmp(*env_copy, name, 5) == 0)
+		if (_strncmp(*env_copy, name, 5) == 0)
 			break;
 	}
 	path_str_ptr = (_strchr(*env_copy, '=')) + 1;

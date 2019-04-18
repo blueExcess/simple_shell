@@ -63,7 +63,7 @@ void updateDir(char *directory, char *beginning)
 	length = _strlen(beginning);
 	while (env[index])
 	{
-		if (strncmp(beginning, env[index++], length) == 0)
+		if (_strncmp(beginning, env[index++], length) == 0)
 		{
 			env[index] = printDir;
 			break;
@@ -96,4 +96,23 @@ char *cpyPath(char *input)
 	dest = dest + length;
 
 	return (dest);
+}
+
+/**
+ * _strncmp - compare two strings
+ * @src: source (compare to)
+ * @check: string to check
+ * @num: num of bytes to check
+ *
+ * Return: 0 if match
+ */
+int _strncmp(char *src, char *check, int num)
+{
+	int i = 0;
+
+	for (; src[i] && (src[i] == check[i]) && i < num - 1; i++)
+		;
+	if (src[i] == check[i])
+		return (0);
+	return (1);
 }

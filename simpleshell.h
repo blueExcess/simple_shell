@@ -61,6 +61,7 @@ long int _atoi(char *str);
 void fly_free(char **str);
 char *cpyPath(char *input);
 void updateDir(char *directory, char *beginning);
+int _strncmp(char *src, char *check, int num);
 
 /* error.c */
 void basic_err(void);
