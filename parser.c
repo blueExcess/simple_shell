@@ -117,10 +117,17 @@ char *com_remover(char *path)
 	return (path);
 }
 
+/**
+ * double_space_remover - removes blank lines
+ * @path: lines passed in
+ *
+ * Return: 1 on success
+ */
 int double_space_remover(char *path)
 {
 	int index;
 	int count = 0;
+
 	for (index = 0; path[index] != '\0'; index++)
 	{
 		if (path[index] == ' ')
