@@ -22,7 +22,7 @@
 /* PROTOTYPES */
 
 /* main.c */
-int main(int ac, char *av[],char **env);
+int main(int ac, char *av[], char **env);
 void record_history(char *input, ssize_t len);
 void print_prompt(void);
 void startup(int ac, char **av);
@@ -73,7 +73,7 @@ char *_itoa(int x);
 /* GLOBALS */
 
 /**
- * flags - flags to use throughout program
+ * struct flags - flags to use throughout program
  * @exit: if exit has been called
  * @startup: if startup processes need to be run
  * @interactive: if in interactive mode or not
@@ -84,10 +84,10 @@ struct flags
 	bool startup;
 	bool interactive;
 
-}flags;
+} flags;
 
 /**
- * global - global variables (not bool flags)
+ * struct global - global variables (not bool flags)
  * @command: name of command that's been parsed
  * @command_length: length of command string
  * @line_no: line no.
@@ -104,7 +104,7 @@ struct global
 	int input;
 	char *az;
 
-}global;
+} global;
 
 extern char **environ;
 
