@@ -152,5 +152,5 @@ void sig_handler(int n __attribute__((unused)))
 {
 	char *prompt = "\n$ ";
 
-	write(STDERR_FILENO, prompt, 5);
+	write(STDERR_FILENO, prompt, 3);
 }
