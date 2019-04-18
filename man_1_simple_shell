@@ -1,0 +1,81 @@
+.TH man 1 "April 17 2019" "1.0" "Simple Shell Man Page"
+.SH NAME
+simple_shell - a sh-style command language interpreter.
+.SH SYNOPSIS
+simple_shell
+.I [FILE]
+.br
+($)
+.I [command] [arguments ...]
+
+.SH DESCRIPTION
+simple_shell is an sh-style command interpreter that executes commands read from the standard input or from a file.
+.TP
+.B Overview
+.RE
+The shell is a command that reads lines from either a file or the terminal, interprets them, and generally executes other commands. It is the program that is running when a user types in ./simple_shell (users can use any shell they want, they must activate it though).
+.P
+.br
+.B Invocation
+.RE
+This Simple_Shell is written in mind with C89 standard of gcc
+.P
+.RS
+.B $ gcc -Wall -Werror -Wextra -pedantic *.c -o simple_shell
+.P
+.RE
+This shell can be used in both interactive mode and non-interactive mode. To use interactive mode just type in
+.B ./simple_shell
+hit enter, and your new shell will start up.
+.SH EXECUTABLES
+Example of executables:
+.IP
+.br
+.\&
+.RS
+\&($) echo "Hello, World!"
+.br
+\&"Hello, World!"
+.br
+\&($)
+.SH BUILTINS
+.IT
+.P
+.B env
+- Prints the enviroment variables of the current user.
+.P
+.B cd
+- Allows the user to change their current working directory.
+.P
+.B exit
+- Allows the user to exit the simple_shell
+.P
+.br
+Examples of built-in commands:
+.IP
+.br
+.\&
+.RS
+\&($) pwd
+.br
+\&/home/user/holberton
+.br
+\&($) cd /simple_shell
+.br
+\&($) pwd
+.br
+\&/home/user/holberton/simple_shell
+.br
+\&($)
+.SH ENVIRONMENT
+The environment is a list of name-value pairs that are passed to an executed program in the same way a normal argument would be passed. You can see
+.B exec(2)
+and
+.B environ(5)
+for more details.
+.SH SEE ALSO
+.I bash(1) sh(1)
+.SH BUGS
+Please do not report bugs, there are some, we repaired what we could.
+.SH AUTHORS
+Nate Petersen, Jared Ratner
